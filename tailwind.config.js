@@ -15,8 +15,8 @@ module.exports = {
         menu: 'context-menu'
       },
       fontFamily: {
-        'serif': ['Moret-Bold', ...defaultTheme.fontFamily?.serif],
-        'sans': ["-apple-system", "BlinkMacSystemFont", "Inter", "system-ui", ...defaultTheme.fontFamily?.sans]
+        'serif': ['Moret-Bold', ...defaultTheme.fontFamily.serif ],
+        'sans': ["-apple-system", "BlinkMacSystemFont", "Inter", "system-ui", ...defaultTheme.fontFamily.sans]
       },
       lineHeight: {
         'super-tight': '0.94',
