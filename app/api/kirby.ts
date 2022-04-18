@@ -1,3 +1,4 @@
+import { json } from "@remix-run/cloudflare"
 import { KirbyQuery, KirbyResponse, PageData } from "~/types/kirby"
 import { HTTPClient } from "./http-client"
 
@@ -29,8 +30,10 @@ export class Kirby extends HTTPClient{
 					select: { title: true, slug: "page.uri" }
 				}
 			}
+		}).then(res => res.data).catch(err => {
+			throw json("", { status: 503, statusText: 'CMS nicht erreichbar!'})
 		})
-		return res.data?.map(page => ({
+		return res?.map(page => ({
 			...page,
 			hasChildren: page.children.length > 0,
 			slug: page.slug == 'home' ? '' : page.slug,

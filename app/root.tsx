@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
   useLocation,
   useMatches,
 } from "@remix-run/react"
@@ -29,9 +30,8 @@ export const links: LinksFunction = () => [
 export const loader: LoaderFunction = async ({context}) => {
   const kirby = new Kirby(context.env.KIRBY_API_URL, context.env.KIRBY_AUTH_TOKEN)
   const navigation = await kirby.getNavigation()
-
   return json({ navigation })
-};
+}
 
 export default function App() {
   const { navigation } = useLoaderData()
@@ -64,6 +64,25 @@ export default function App() {
         <Scripts />
         <LiveReload />
         <ScrollRestoration />
+      </body>
+    </html>
+  )
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+  return (
+    <html>
+      <head>
+        <title>Oops!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body className="bg-red-100 text-red-900 p-6">
+        <h1 className="font-bold text-3xl">
+          {caught.status} - {caught.statusText}
+        </h1>        
+        <Scripts />
       </body>
     </html>
   )

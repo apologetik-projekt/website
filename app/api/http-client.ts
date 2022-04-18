@@ -15,15 +15,21 @@ export class HTTPClient {
 					}
 				],
 				afterResponse: [
-					async (_, options, response) => {
+					async (request, options, response) => {
 						if (!response.ok) {
 							switch(response.status) {
 								case 403:
-									throw json("Your token is invalid or expired", { status: 403 })
+									const statusText = "Your Token is invalid or expired"
+									throw json(statusText, { status: 403, statusText })
 								case 404:
+									const { query } = await request.json()
+									if (query.includes('site.pages')) { 
+										const statusText = "CMS nicht erreichbar!"
+										throw json(statusText, { status: 503, statusText: statusText })
+									}
 									throw json("Not Found", { status: 404 })
 								default: 
-									throw json("An error occurred", { status: response.status })
+									throw json("An error occurred", { status: response.status, statusText: response.statusText })
 							}
 						}
 					}
