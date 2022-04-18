@@ -1,0 +1,11 @@
+.env
+.env.local
+/.cache
+/functions/\[\[path\]\].js
+/public/build
+node_modules
+/package-lock.json
+
+/app/tailwind.css
+/functions
+
