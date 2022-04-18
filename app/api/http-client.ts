@@ -7,7 +7,7 @@ export class HTTPClient {
 	constructor(config) {
 		this.client = ky.extend({
 			prefixUrl: config.base_url,
-			mode: 'no-cors',
+			credentials: 'include',
 			hooks: {
 				beforeRequest: [
 					request => {
