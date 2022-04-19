@@ -99,7 +99,7 @@ export function CatchBoundary() {
 function Maintenance() {
   return (
     <div className="mt-14 md:mt-18 p-1">
-      <img height="400" width="266" style={{width: 400}} className="w-full mx-auto md:w-[400px] mb-8 md:mb-10" src="/maintenance.svg" alt="Bauarbeiten" />
+      <img height="400" width="266" className="w-full mx-auto md:w-[400px] mb-8 md:mb-10" src="/maintenance.svg" alt="Bauarbeiten" />
       <section className="mt-4 text-gray-800 max-w-prose mx-auto">
         <h2 className="md:text-center text-2xl md:text-4xl font-bold md:font-extrabold mb-4 md:mb-5 text-gray-900 leading-tight">Vorübergehend nicht erreichbar!</h2>
         <p className="md:text-center break-normal">
