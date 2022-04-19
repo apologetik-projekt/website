@@ -1,4 +1,5 @@
 import { EtherialResponse, SuccessfulResponse } from "~/types/frank"
+import HttpStatusCode from "~/types/http_status_code"
 
 // [vars]
 const EMAIL_API_URL = 'https://frank-puce.vercel.app/api/email'
@@ -34,9 +35,9 @@ export default class FrankClient {
 			})
 		})
 
-		if (mail.status === 200 && this.secret.includes('test')) {
+		if (mail.status === HttpStatusCode.OK && this.secret.includes('test')) {
 			const { messageId, url } = await mail.json()
-			return { status: 200, etherial: { messageId, url } }
+			return { status: HttpStatusCode.OK, etherial: { messageId, url } }
 		}
 
 		return { status: mail.status }

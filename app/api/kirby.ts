@@ -1,4 +1,5 @@
 import { json } from "@remix-run/cloudflare"
+import HttpStatusCode from "~/types/http_status_code"
 import { KirbyQuery, KirbyResponse, PageData } from "~/types/kirby"
 import { HTTPClient } from "./http-client"
 
@@ -31,7 +32,7 @@ export class Kirby extends HTTPClient{
 				}
 			}
 		}).then(res => res.data).catch(err => {
-			throw json("", { status: 503, statusText: 'CMS nicht erreichbar!'})
+			throw json("Service Unavailable", { status: HttpStatusCode.SERVICE_UNAVAILABLE, statusText: 'CMS nicht erreichbar!'})
 		})
 		return res?.map(page => ({
 			...page,

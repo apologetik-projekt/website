@@ -1,6 +1,7 @@
 import ky from "ky"
 import { json } from "@remix-run/cloudflare"
 import type { KyInstance } from "ky/distribution/types/ky"
+import HttpStatusCode from "~/types/http_status_code"
 
 export class HTTPClient {
 	public client: KyInstance
@@ -18,16 +19,9 @@ export class HTTPClient {
 					async (request, options, response) => {
 						if (!response.ok) {
 							switch(response.status) {
-								case 403:
+								case HttpStatusCode.FORBIDDEN:
 									const statusText = "Your Token is invalid or expired"
-									throw json(statusText, { status: 403, statusText })
-								case 404:
-									const { query } = await request.json()
-									if (query.includes('site.pages')) { 
-										const statusText = "CMS nicht erreichbar!"
-										throw json(statusText, { status: 503, statusText: statusText })
-									}
-									throw json("Not Found", { status: 404 })
+									throw json(statusText, { status: HttpStatusCode.FORBIDDEN, statusText })
 								default: 
 									throw json("An error occurred", { status: response.status, statusText: response.statusText })
 							}
