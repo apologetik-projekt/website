@@ -15,6 +15,12 @@ export default function Navigation({background = "light", navigation}: Props) {
 		return item.items && item.items.length > 0
 	}
 
+	function getNavLink(item: NavigationItem) {
+		if (item.slug == 'home') return '/'
+		if (hasChildren(item)) return `/${item.items[0].slug}`
+		return `/${item.slug}`
+	}
+
 	return(
 		<nav className={`w-full font-mono relative z-10 max-w-5xl mx-auto py-6 px-4 sm:px-5 md:pl-7 lg:px-0 flex justify-between items-center ${background == 'dark' ? 'text-gray-100' : ''}`}>
 			<Link to="/" className="md:translate-y-1.5 ml-1 no-tap active:sepia">
@@ -23,7 +29,7 @@ export default function Navigation({background = "light", navigation}: Props) {
 			<ul className="hidden md:flex space-x-2 leading-none items-start font-medium uppercase text-nav #text-gray-200">
 				{navigation.map((item)=>(
 						<li key={item.slug || 'home'}  className="group relative leading-none">
-							<NavLink to={`/${item.slug == 'home' ? '' : item.slug}`} className={hasChildren(item) ? 'active:pointer-events-none': undefined}>{({isActive}) => (
+							<NavLink to={getNavLink(item)} className={hasChildren(item) ? 'active:pointer-events-none': undefined}>{({isActive}) => (
 								<>
 									<span className={clsx(
 										'px-3 py-2 rounded-xs whitespace-nowrap', 
