@@ -9,7 +9,6 @@
 html, body {
 	width: 100%;
 	height: 100%;
-	background-color: #11111b !important;
 	color: #afd33d;
 	font-size: calc(6.4px + 0.8125vw);
 	font-family: "Space Grotesk", sans-serif;

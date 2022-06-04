@@ -57,8 +57,8 @@ export default function Status404() {
 				<Links />
 				<Meta />
 			</head>
-			<body>
-				<div className="message">
+			<body className="bg-[#101010]">
+				<div className="message overflow-hidden">
 					<h1>404</h1>
 					<div className="bottom">
 						<p className="mb-10">Wir konnten die Seite leider nicht finden</p>
