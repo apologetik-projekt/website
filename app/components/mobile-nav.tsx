@@ -2,9 +2,17 @@ import { useEffect, useState } from "react"
 import { NavLink, Link, useResolvedPath, useMatches } from '@remix-run/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import useStateMachine from "@cassiozen/usestatemachine"
+import type { NavigationItem } from "~/types/navigation"
 
+interface Props {
+	navigation: NavigationItem[]
+}
 
-export default function MobileNavigation({ navigation }) {
+function hasChildren(item: NavigationItem) {
+	return item.items && item.items.length > 0
+}
+
+export default function MobileNavigation({ navigation }: Props) {
 	const [menuState, setMenuState] = useStateMachine({
 		initial: 'closed',
 		states: {
@@ -111,7 +119,7 @@ export default function MobileNavigation({ navigation }) {
 							animate="show" className="mt-10 p-4 px-8 text-6xl font-semibold space-y-3 flex flex-col mb-4">
 							{navigation.map((item) => (
 								<motion.li key={item.title} variants={menuItem}>
-									{item.hasChildren
+									{hasChildren(item)
 										? <SubLinks onClick={startTransition} item={item} />
 										: <NavLink to={`/${item.slug}`} onClick={startTransition} className={({ isActive }) => `${isActive ? "text-yellow-400 no-tap" : undefined} active:text-yellow-600 no-tap`}>{item.title}</NavLink>
 									}
@@ -137,7 +145,7 @@ export default function MobileNavigation({ navigation }) {
 	)
 }
 
-function SubLinks({ item, onClick }) {
+function SubLinks({ item, onClick }: { item: NavigationItem, onClick: () => void }) {
 	const isParent = window.location.href.includes(item.slug) 
 	const [collapsed, setCollapse] = useState(true)
 	
@@ -150,9 +158,9 @@ function SubLinks({ item, onClick }) {
 			{
 				!collapsed &&
 				<ul className="px-1 mt-3 mb-8 space-y-2 font-medium text-gray-200/70">
-					{item.children.map((item) => (
+					{item.items.map((item) => (
 						<li key={item.slug} className="text-3xl">
-							<NavLink to={item.slug} className={({ isActive }) => isActive ? 'text-white' : ''} onClick={onClick}>{item.title}</NavLink>
+							<NavLink to={item.uiRouterKey} className={({ isActive }) => isActive ? 'text-white' : ''} onClick={onClick}>{item.title}</NavLink>
 						</li>
 					))}
 				</ul>

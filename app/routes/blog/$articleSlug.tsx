@@ -28,7 +28,7 @@ export default function Article(){
 	return (	
 		<article className="max-w-4xl mx-auto p-4 pb-10">
 			<header className="max-w-2xl mx-auto px-1">
-				<h1 className="font-extrabold font-mono text-5xl md:text-7xl pt-2">{article?.title}</h1>
+				<h1 className="font-extrabold font-mono text-5xl md:text-7xl md:pt-2">{article?.title}</h1>
 				<Author author={article?.author} date={article?.date} />	
 			</header>
 
