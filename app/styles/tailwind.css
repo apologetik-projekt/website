@@ -1,6 +1,9 @@
 @tailwind base;
 
 /* Write your own custom base styles here */
+.font-mono {
+  letter-spacing: -0.01em;
+}
 
 /* Start purging... */
 @tailwind components;
@@ -12,6 +15,12 @@
 @tailwind utilities;
 /* Stop purging. */
 
+blockquote {
+  @apply border-l-4 border-gray-800 py-0.5 pb-1;
+}
+blockquote > *:first-child {
+  @apply font-medium italic leading-7 text-xl
+}
 
 #heading *:not(h1) {
 	display: none;
@@ -19,7 +28,6 @@
 
 #heading > h1 {
 	color: #FFEF31;
-	font-family: sans-serif;
 	font-weight: 800;
 	font-size: 3rem;
 	line-height: 1;
@@ -40,6 +48,10 @@ body {
 
 .radial-gradient {
   background: url(/gradient.svg);
+}
+
+.radial-gradient-solid {
+  background: url(/gradient-solid.svg);
 }
 
 .bg-center-topish {
@@ -117,5 +129,5 @@ li::marker {
 	position: absolute;
 	opacity: 0.9;
 	z-index: -1;
-	transform: translate(-1.125rem, -0.9rem) rotate(-2deg);
+	transform: translate(-1.25rem, -0.75rem) rotate(-5deg);
 }

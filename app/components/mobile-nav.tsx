@@ -92,14 +92,14 @@ export default function MobileNavigation({ navigation }) {
 				variants={menuFrame}
 				initial={false}
 				animate={menuState.value === 'closed' ? 'closed' : 'open'}
-				className="float-right text-gray-200 radial-gradient">
+				className="float-right font-mono text-gray-200 radial-gradient-solid">
 				<motion.button
 					onClick={() => { setMenuState(menuState.value === 'open' ? 'CLOSE' : 'OPEN') }}
 					type="button"
 					className="fixed rounded-full text-white clean-outline right-4 top-4 w-14 h-14 no-tap active:bg-gray-700">
 					<span className="sr-only">Navigation öffnen</span>
 					<svg width="24" height="24" fill="none" className="absolute top-1/2 left-1/2 -mt-3 -ml-3 transition duration-300 transform scale-125">
-						<path d={menuState.value !== 'closed' ? "M6 18L18 6M6 6l12 12" : "M4 8h16M4 16h16"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d={menuState.value !== 'closed' ? "M6 18L18 6M6 6l12 12" : "M4 8h16M4 16h16"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="round" />
 					</svg>
 				</motion.button>
 				<AnimatePresence custom={menuState.value == 'transition'}>
@@ -108,7 +108,7 @@ export default function MobileNavigation({ navigation }) {
 							variants={menuList}
 							initial="hidden"
 							exit="exit"
-							animate="show" className="mt-10 p-4 px-8 text-6xl font-sans font-semibold space-y-3 flex flex-col mb-4">
+							animate="show" className="mt-10 p-4 px-8 text-6xl font-semibold space-y-3 flex flex-col mb-4">
 							{navigation.map((item) => (
 								<motion.li key={item.title} variants={menuItem}>
 									{item.hasChildren
@@ -151,7 +151,7 @@ function SubLinks({ item, onClick }) {
 				!collapsed &&
 				<ul className="px-1 mt-3 mb-8 space-y-2 font-medium text-gray-200/70">
 					{item.children.map((item) => (
-						<li key={item.slug} className="font-sans text-3xl">
+						<li key={item.slug} className="text-3xl">
 							<NavLink to={item.slug} className={({ isActive }) => isActive ? 'text-white' : ''} onClick={onClick}>{item.title}</NavLink>
 						</li>
 					))}

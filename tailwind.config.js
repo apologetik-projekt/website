@@ -15,8 +15,9 @@ module.exports = {
         menu: 'context-menu'
       },
       fontFamily: {
+        'mono': ['Space Grotesk', ...defaultTheme.fontFamily.mono],
         'serif': ['Moret-Bold', ...defaultTheme.fontFamily.serif ],
-        'sans': ["-apple-system", "BlinkMacSystemFont", "Inter", "system-ui", ...defaultTheme.fontFamily.sans]
+        'sans': ["IBM Plex Sans","Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", ...defaultTheme.fontFamily.sans]
       },
       lineHeight: {
         'super-tight': '0.94',

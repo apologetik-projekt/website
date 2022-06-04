@@ -11,7 +11,6 @@ import {
 } from "@remix-run/react"
 import { MetaFunction, LinksFunction, LoaderFunction, json } from "@remix-run/cloudflare"
 import styles from "./tailwind.css"
-import { Kirby } from "./api/kirby"
 import Navigation from "~/components/navigation"
 import { useLoaderData } from "@remix-run/react"
 import Footer from "./components/footer"
@@ -20,6 +19,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import AnimatedRoute from "./components/animated-route"
 import HttpStatusCode from "./types/http_status_code"
 import clsx from "clsx"
+import { Strapi } from "./api/strapi"
 
 export const meta: MetaFunction = () => ({ 
   title: "Das Apologetik Projekt - Christliche Apologetik",
@@ -29,12 +29,24 @@ export const meta: MetaFunction = () => ({
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
+  { rel: "stylesheet", href: "https://api.fonts.coollabs.io/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"},
+  { rel: "stylesheet", href: "https://api.fonts.coollabs.io/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"},
+  // { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon/apple-touch-icon.png"},
+  // { rel: "icon", sizes: "16x16", type: "image/png", href: "/favicon/favicon-16x16.png"},
+  // { rel: "icon", sizes: "32x32", type: "image/png", href: "/favicon/favicon-32x32.png"},
+  { rel: "manifest", href: "/site.webmanifest"},
+  { rel: "mask-icon", href: "/favicon/safari-pinned-tab.svg", color: "#000000"},
+  { rel: "shortcut icon", href: "/favicon/favicon.svg"},  
 ]
 
 export const loader: LoaderFunction = async ({context}) => {
-  const kirby = new Kirby(context.env.KIRBY_API_URL, context.env.KIRBY_AUTH_TOKEN)
-  const navigation = await kirby.getNavigation()
-  return json({ navigation })
+  const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
+  const navigation = await strapi.fetch('navigation/render/navigation?type=TREE')
+  return json({ navigation }, {
+    headers: {
+      'Cache-Control': 'max-age=3600, s-maxage=30'
+    }
+  })
 }
 
 export default function App() {
@@ -49,8 +61,10 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />  
+        <link rel="preconnect" href="https://api.fonts.coollabs.io" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+        <meta name="theme-color" content="#000" />
         <Meta />
         <Links />
       </head>
