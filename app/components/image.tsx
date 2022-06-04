@@ -1,6 +1,6 @@
 import { BASE_URL, ENV } from "../utils/constants"
 
-function getImageUrl(image: string) {
+export function getImageUrl(image: string) {
 		if (image.startsWith("http")) return image
 		if (ENV == 'dev') return `http://127.0.0.1:1337${image}`
 		else return `https://images.weserv.nl/?url=${BASE_URL}${image}`

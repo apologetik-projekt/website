@@ -1,5 +1,6 @@
 import { NavLink, Link } from '@remix-run/react'
 import clsx from 'clsx'
+import { NavigationItem } from '~/types/navigation'
 
 interface Props {
 	navigation: NavigationItem[],
