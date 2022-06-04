@@ -15,14 +15,12 @@ export class HTTPClient {
 				beforeRequest: [
 					request => {
 						request.headers.set(
-							'Authorization', 
-							config.base_url.includes('1337') ? `Bearer ${config.auth_token}`: `Basic ${config.auth_token}`
+							'Authorization', `Bearer ${config.auth_token}`
 						)
 					}
 				],
 				afterResponse: [
 					async (request, options, response) => {
-						//if (config.base_url.includes('1337')) console.log(response.status)
 						if (!response.ok) {
 							switch(response.status) {
 								case HttpStatusCode.FORBIDDEN:
