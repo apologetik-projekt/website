@@ -22,14 +22,14 @@ export default function Navigation({background = "light", navigation}: Props) {
 	}
 
 	return(
-		<nav className={`w-full font-mono relative z-10 max-w-5xl mx-auto py-6 px-4 sm:px-5 md:pl-7 lg:px-0 flex justify-between items-center ${background == 'dark' ? 'text-gray-100' : ''}`}>
-			<Link to="/" className="md:translate-y-1.5 ml-1 no-tap active:sepia">
+		<nav className={`w-full font-mono relative z-10 max-w-5xl mx-auto py-6 px-4 sm:px-5 md:pl-7 lg:px-0 select-none flex justify-between items-center ${background == 'dark' ? 'text-gray-100' : ''}`}>
+			<Link prefetch='render' to="/" className="md:translate-y-1.5 ml-1 no-tap active:sepia">
 				<img height={30} width={84} className={clsx({invert: hasDarkBackground})} src="/logo.svg" alt="Apologetik Projekt - Logo" />
 			</Link>
 			<ul className="hidden md:flex space-x-2 leading-none items-start font-medium uppercase text-nav #text-gray-200">
 				{navigation.map((item)=>(
 						<li key={item.slug || 'home'}  className="group relative leading-none">
-							<NavLink to={getNavLink(item)} className={hasChildren(item) ? 'active:pointer-events-none': undefined}>{({isActive}) => (
+							<NavLink prefetch='intent' to={getNavLink(item)} className={hasChildren(item) ? 'active:pointer-events-none': undefined}>{({isActive}) => (
 								<>
 									<span className={clsx(
 										'px-3 py-2 rounded-xs whitespace-nowrap', 

@@ -12,7 +12,7 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async ({context}) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
-	const { data: articles } = await strapi.fetch('articles?populate[0]=image&fields[0]=title&fields[1]=slug&fields[2]=description')
+	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description')
 
 	return json(articles)
 }
@@ -25,28 +25,35 @@ export default function Blog() {
 
 	return (
 		<>
-			<section id="latestArticle" className="bg-gray-200 bg-opacity-90 w-full -mt-24 pt-28 pb-5">
-				<div className="max-w-4xl mx-auto pb-6 mt-4 px-4">
-					<Link to={`/blog/${latestArticle.slug}`}>
-						<a id="feature" className="flex flex-col md:flex-row mb-4">
-							<div id="article_thumbnail" className="md:w-6/12 flex-shrink-0">
+			<section id="latestArticle" className="bg-opacity-90 w-full -mt-28 pt-8" style={{backgroundImage: 'url(/bg_paper_light.jpg)'}}>
+				<div className="max-w-4xl mx-auto mt-20 md:mt-8 md:bg-white md:shadow-lg rounded-px md:translate-y-14">
+					<div className="flex flex-col md:flex-row mb-4">
+							<div id="article_thumbnail" className="md:w-5/12 flex-shrink-0 p-5">
 								<Image
 									alt={latestArticle.image?.alternativeText || ""}
-									className="aspect-16/9 bg-black object-cover shadow-sm" 
+									className="aspect-[4/3] md:aspect-square bg-black object-cover shadow-sm rounded-px" 
 									src={latestArticle.image?.url ?? fallBackImage} />
 							</div>
 
-							<div id="article_text" className="md:w-6/12 mt-3 md:mt-0 px-0.5 md:pl-6" style={{ flexBasis: "100%" }}>
+							<div id="article_text" className="md:w-7/12 pt-2 md:pt-8 px-5 md:px-3 pb-8" style={{ flexBasis: "100%" }}>
 								<h2 className="font-extrabold font-mono leading-none text-5xl tracking-tighter">
-									{latestArticle.title}
+									<Link to={`/blog/${latestArticle.slug}`}>{latestArticle.title}</Link>
 								</h2>
-								<p className="text-gray-600 leading-snug text-lg mt-4" >{latestArticle.description}</p>
+								<div className="my-4 flex items-center">
+									<Image 
+										className="rounded-full mr-2 bg-blue-400"
+										src={latestArticle.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
+									<span className="text-gray-800 leading-relaxed">{latestArticle.author.firstName} {latestArticle.author.lastName}</span>
+								</div>
+								<p className="text-gray-900 leading-snug text-lg mr-1">
+									{latestArticle.description}
+								</p>
+								<Link to={`/blog/${latestArticle.slug}`} className="text-sky-700 font-medium mt-3 block hover:text-blue-800 cursor:pointer">Mehr lesen&#x2009;&rarr;</Link>
 							</div>
-						</a>
-					</Link>
+					</div>
 				</div>
 			</section>
-			<main className="max-w-4xl mx-auto px-4 mt-10 pb-10">
+			<main className="max-w-4xl mx-auto px-5 mt-8 md:mt-32 pb-10">
 				<section className="grid grid-cols-1 gap-y-6 max-w-2xl">
 					{
 						articles.slice(1).map((article, index) => (
@@ -54,7 +61,7 @@ export default function Blog() {
 								<div className="md:w-4/12 md:mr-4 flex-shrink-0">
 									<Image alt={article.title} className="object-cover aspect-[16/11] w-full" src={article.image.url ?? fallBackImage} width={300} height={166} />
 								</div>
-								<div className="py-2 md:py-0.5 md:pt-0">
+								<div className="py-4 md:py-0.5 md:pt-0">
 									<h3 className="font-bold text-black font-mono leading-7 tracking-tighter text-[1.55rem] mb-1.5">{article.title}</h3>
 									<p className="text-gray-600">{article.description}</p>
 								</div>

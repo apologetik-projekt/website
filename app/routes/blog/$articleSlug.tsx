@@ -22,7 +22,7 @@ export const links: LinksFunction = () => [
 
 export const loader: LoaderFunction = async ({ params, context }) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
-	const { data: article } = (await strapi.fetch(`slugify/slugs/article/${params.articleSlug}?populate=*`))
+	const { data: article } = (await strapi.fetch(`slugify/slugs/article/${params.articleSlug}?populate=author.image,image,content`))
   return json(article)
 }
 
@@ -37,10 +37,10 @@ export default function Article(){
 			</header>
 
 			<div className="my-3 -mx-4 md:m-4 md:mb-10">
-				<Image className="object-cover bg-black origin-center w-full" src={article?.image.url} alt="Image" width="836" height="400"/>
+				<Image className="object-cover bg-black origin-center w-full aspect-video" src={article?.image.url} alt="Image" width="836" height="400"/>
 			</div>
 			
-		 <section id="blog" className="prose-lg prose-headings:font-mono max-w-2xl mx-auto px-1 -mt-1">
+		 <section id="blog" className="prose-lg prose-headings:font-mono max-w-2xl mx-auto px-1 -mt-1 selection:bg-sky-300">
 				{article?.content.map((block, index)=>{
 					if (block.__component === 'page.editor') {
 							return <div key={index} className="break-words" dangerouslySetInnerHTML={{__html: block.editor}}></div>
@@ -56,13 +56,13 @@ export default function Article(){
 
 function Author({author, date}) {
 	if (!author) return null
-	const profileImage = author?.profile_image?.url ?? `https://cdn.statically.io/avatar/shape=circle/${author?.firstName.charAt(0)}${author?.lastName.charAt(0) || author?.lastName.charAt(1)}_B`
+	const profileImage = author?.image?.url ?? `https://ui-avatars.com/api/?name=${author?.firstName}+${author?.lastName}&background=7cd3fc&color=22222c`
 	return (
 		<div className="flex items-center py-4 mt-2 -ml-0.5">
 			<Image alt="avatar" className="object-cover object-center border-2 border-transparent rounded-full h-10 w-10 mr-2" height="28px" width="28px" src={profileImage} />
 			<p className="leading-none mt-1">
 				<span className="uppercase font-semibold text-gray-700 opacity-95">{author.firstName} {author.lastName}</span> <br />
-				<span className="text-sm font-medium text-gray-700 opacity-75 block">veröffentlicht am {date}</span>
+				<span className="text-sm font-medium text-gray-700 opacity-75 block">veröffentlicht am {new Date(date).toLocaleDateString()}</span>
 			</p>
 		</div>
 	)

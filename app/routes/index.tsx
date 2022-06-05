@@ -32,7 +32,7 @@ export default function Index() {
 
           // *** EDITOR ***
           if (block.__component == "page.editor") return (
-            <div key={block.id} className="prose-lg my-2 md:prose-lg prose-headings:font-mono" dangerouslySetInnerHTML={{ __html: block.editor }}></div>
+            <div key={block.id} className="prose-lg my-2 md:prose-lg prose-headings:font-mono selection:bg-sky-300" dangerouslySetInnerHTML={{ __html: block.editor }}></div>
           )
 
           // *** TESTIMONIALS ***
