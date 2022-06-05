@@ -13,8 +13,8 @@ export default function Citation({quote, cite}: Props) {
 				fillRule="evenodd"/>
 		 </svg>
 		 <div className="p-5 bg-yellow-400 bg-opacity-30">
-			 <div className="prose md:text-justify" dangerouslySetInnerHTML={{ __html: quote}} />
-			 <span className="text-right block mt-1 italic"><strong className="font-semibold text-black block mt-2 text-opacity-75">{cite}</strong></span>
+			 <div className="prose-md text-justify font-book text-black" dangerouslySetInnerHTML={{ __html: quote}} />
+			 <span className="text-right block mt-1"><strong className="font-semibold !text-black block mt-2 text-opacity-75">{cite}</strong></span>
 		 </div>
 		 <svg viewBox="0 5 400 30" xmlns="http://www.w3.org/2000/svg">
 			 <path 

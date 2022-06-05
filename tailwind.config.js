@@ -16,7 +16,7 @@ module.exports = {
       },
       fontFamily: {
         'mono': ['Space Grotesk', ...defaultTheme.fontFamily.mono],
-        'serif': ['Moret-Bold', ...defaultTheme.fontFamily.serif ],
+        'serif': defaultTheme.fontFamily.serif,
         'sans': ["IBM Plex Sans","Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", ...defaultTheme.fontFamily.sans]
       },
       lineHeight: {

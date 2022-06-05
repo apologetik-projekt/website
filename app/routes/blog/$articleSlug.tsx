@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction } from "@remix-run/cloudflare"
+import { json, LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/cloudflare"
 import { useLoaderData } from "@remix-run/react"
 import { Strapi } from "~/api/strapi"
 import Citation from "~/components/citation"
@@ -15,6 +15,10 @@ export const meta: MetaFunction = ({data, location}) => ({
 	'og:image': data.image?.url,
 	'twitter:card': 'summary'
 })
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: "https://api.fonts.coollabs.io/css2?family=Noticia+Text&display=swap"},
+]
 
 export const loader: LoaderFunction = async ({ params, context }) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
@@ -36,7 +40,7 @@ export default function Article(){
 				<Image className="object-cover bg-black origin-center w-full" src={article?.image.url} alt="Image" width="836" height="400"/>
 			</div>
 			
-		 <section id="blog" className="prose-lg max-w-2xl mx-auto px-1 -mt-1">
+		 <section id="blog" className="prose-lg prose-headings:font-mono max-w-2xl mx-auto px-1 -mt-1">
 				{article?.content.map((block, index)=>{
 					if (block.__component === 'page.editor') {
 							return <div key={index} className="break-words" dangerouslySetInnerHTML={{__html: block.editor}}></div>
