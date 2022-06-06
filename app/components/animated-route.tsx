@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 export default function ({ children }) {
 	return (
 		<motion.div
+			className="grow"
 			variants={animations}
 			initial="initial"
 			animate="enter"

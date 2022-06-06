@@ -14,6 +14,7 @@ export const loader: LoaderFunction = async ({ context, params }) => {
   const slugArray = params["*"]?.split("/")
   const slug = slugArray?.[slugArray.length - 1]
   if (slug == 'home') return redirect('/')
+  if (slug == 'login') return redirect(context.env.STRAPI_API_URL.replace('api', 'admin'))
 
   const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
   const page = await strapi.fetch(`slugify/slugs/page/${slug}?populate[0]=pageHeader.image&populate[1]=content`)

@@ -3,7 +3,7 @@ import { Link } from "@remix-run/react"
 export default function Footer(){
 
 	return (
-		<footer className="w-full bg-gray-900 text-white mt-10">
+		<footer className="w-full bg-gray-900 text-white mt-10 self-end">
 			<div className="pb-12 px-5 md:px-8 lg:px-16 max-w-6xl mx-auto">
 				<div className="w-full pt-12 flex flex-col sm:flex-row justify-between">
 					<div className="w-full sm:w-2/5 pr-6 flex flex-col space-y-4">

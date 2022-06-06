@@ -1,6 +1,7 @@
 import ReCAPTCHA from "react-google-recaptcha"
 import React, { useEffect, useRef } from 'react'
 import { useFetcher } from "@remix-run/react"
+import { trackEvent } from "~/api/plausible"
 
 export const meta = () => ({
 	noindex: {
@@ -26,8 +27,10 @@ export default function ContactForm({recaptchaKey}) {
 	}
 
 	useEffect(() => {
-		if (isSucceeded) resetForm()
-		console.log(recaptchaKey)
+		if (isSucceeded) {
+			resetForm()
+			trackEvent('Kontaktanfrage')
+		}
 	}, [fetcher])
 
 	return (

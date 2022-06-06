@@ -18,6 +18,8 @@ import { AnimatePresence } from "framer-motion"
 import AnimatedRoute from "./components/animated-route"
 import { Strapi } from "./api/strapi"
 import { CatchBoundary as GlobalCatchBoundary } from "./components/catch-boundary"
+import { trackPageview } from './api/plausible'
+import { useEffect } from "react"
 
 export const meta: MetaFunction = () => ({ 
   title: "Das Apologetik Projekt - Christliche Apologetik",
@@ -54,6 +56,10 @@ export default function App() {
   const currentHandle = matches?.[matches.length - 1]?.handle
   const headerTheme = currentHandle ? currentHandle.header : "light"  
 
+  useEffect(() => {
+    trackPageview();
+  }, [location]);
+
   return (
     <html lang="de">
       <head>
@@ -66,7 +72,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen">
+      <body className="min-h-screen flex flex-col">
         <MobileNavigation navigation={navigation}/>
         <Navigation navigation={navigation} background={headerTheme}/>
 
