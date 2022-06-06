@@ -121,7 +121,7 @@ export default function MobileNavigation({ navigation }: Props) {
 								<motion.li key={item.title} variants={menuItem}>
 									{hasChildren(item)
 										? <SubLinks onClick={startTransition} item={item} />
-										: <NavLink to={`/${item.slug}`} onClick={startTransition} className={({ isActive }) => `${isActive ? "text-yellow-400 no-tap" : undefined} active:text-yellow-600 no-tap`}>{item.title}</NavLink>
+										: <NavLink to={item.slug == 'home' ? '/': `/${item.slug}`} onClick={startTransition} className={({ isActive }) => `${isActive ? "text-yellow-400 no-tap" : undefined} active:text-yellow-600 no-tap`}>{item.title}</NavLink>
 									}
 								</motion.li>
 							))}
