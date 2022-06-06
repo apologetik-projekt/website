@@ -153,7 +153,7 @@ function SubLinks({ item, onClick }: { item: NavigationItem, onClick: () => void
 	
 	return (
 		<div>
-			<div onClick={() => setCollapse(!collapsed)} className="active:text-indigo-100 flex justify-between cursor-pointer items-center">
+			<div onClick={() => setCollapse(!collapsed)} className="active:text-indigo-100 flex justify-between cursor-pointer items-center no-tap">
 				<span className={isParent ? 'text-yellow-400' : undefined}>{item.title}</span>
 				<svg className={`text-gray-200/80 transition duration-75 origin-center transform  ${!collapsed && 'rotate-180'}`} xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinecap="square"><path d="M6 9l6 6 6-6" /></svg>
 			</div>
