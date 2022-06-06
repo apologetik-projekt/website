@@ -28,7 +28,7 @@ export default function Navigation({background = "light", navigation}: Props) {
 			</Link>
 			<ul className="hidden md:flex space-x-2 leading-none items-start font-medium uppercase text-nav #text-gray-200">
 				{navigation.map((item)=>(
-						<li key={item.slug || 'home'}  className="group relative leading-none">
+						<li key={item.slug || 'home'}  className="group relative leading-none no-tap">
 							<NavLink prefetch='intent' to={getNavLink(item)} className={hasChildren(item) ? 'active:pointer-events-none': undefined}>{({isActive}) => (
 								<>
 									<span className={clsx(

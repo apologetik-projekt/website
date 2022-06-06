@@ -37,7 +37,7 @@ export default function Article(){
 			</header>
 
 			<div className="my-3 -mx-4 md:m-4 md:mb-10">
-				<Image className="object-cover bg-black origin-center w-full aspect-video" src={article?.image.url} alt="Image" width="836" height="400"/>
+				<Image className="object-cover bg-black origin-center w-full aspect-video" src={article?.image.url} alt="Image" width="800" height="450"/>
 			</div>
 			
 		 <section id="blog" className="prose-lg prose-headings:font-mono max-w-2xl mx-auto px-1 -mt-1 selection:bg-sky-300">

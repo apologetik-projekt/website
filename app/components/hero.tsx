@@ -37,7 +37,7 @@ export default ({heading, imageUrl}: Props) => (
 				<div className="max-w-5xl pt-5 pb-0 md:pt-10 md:pb-12 mx-auto -mt-2 md:mt-2 px-4 sm:px-5 md:px-7 lg:px-0">
 				<section className="flex flex-col md:flex-row-reverse justify-between space-x-2 md:pb-4">
 					<motion.div variants={variants} initial="before" animate="after" className="my-2 md:mt-0 md:w-3/5 md:-ml-12">
-						<Image alt="Zwei Personen unterhalten sich" width="570" className="m-0 bg-yellow-500 saturate-[115%]" height="360" loading="eager" src={imageUrl}/>
+						<Image alt="Zwei Personen unterhalten sich" width="675" className="m-0 bg-yellow-500 saturate-[115%]" height="450" loading="eager" src={imageUrl}/>
 					</motion.div>
 					<motion.div variants={textVariant} id="heading" initial="hidden" animate="show" className="-mt-6 sm:mt-10 md:w-3/5 md:min-w-[350px]">
 						<h1 className="leading-7 font-mono drop-shadow-sm text-xl relative z-10">{heading}</h1>

@@ -31,7 +31,8 @@ export default function Blog() {
 							<div id="article_thumbnail" className="md:w-5/12 flex-shrink-0 p-5">
 								<Image
 									alt={latestArticle.image?.alternativeText || ""}
-									className="aspect-[4/3] md:aspect-square bg-black object-cover shadow-sm rounded-px" 
+									height={400} width={400}
+									className="aspect-[4/3] md:aspect-square bg-black object-cover w-full shadow-sm rounded-px" 
 									src={latestArticle.image?.url ?? fallBackImage} />
 							</div>
 
@@ -41,7 +42,7 @@ export default function Blog() {
 								</h2>
 								<div className="my-4 flex items-center">
 									<Image 
-										className="rounded-full mr-2 bg-blue-400"
+										className="rounded-full overflow-hidden mr-2 bg-blue-400"
 										src={latestArticle.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
 									<span className="text-gray-800 leading-relaxed">{latestArticle.author.firstName} {latestArticle.author.lastName}</span>
 								</div>

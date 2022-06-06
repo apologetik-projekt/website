@@ -47,7 +47,7 @@ export default function ContactForm({recaptchaKey}) {
 					) : null
 				) : null}
 
-				<div className="space-y-6 text-gray-800 uppercase tracking-wide font-bold">
+				<div className="space-y-6 text-gray-800 uppercase tracking-wide font-bold no-tap">
 					<div>
 						<label className="text-xs leading-none" htmlFor="name">Name</label>
 						<input
