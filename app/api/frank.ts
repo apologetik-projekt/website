@@ -1,4 +1,4 @@
-import { EtherialResponse, SuccessfulResponse } from "~/types/frank"
+import { EtherialResponse, ReCAPTCHAResponse, SuccessfulResponse } from "~/types/frank"
 import HttpStatusCode from "~/types/http_status_code"
 
 // [vars]
@@ -14,9 +14,11 @@ export default class FrankClient {
 	}
 
 	public async validateHuman(secret: string, token: string): Promise<boolean> {
-		const response = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`, { method: "POST"})
-		const { success } = await response.json()
-		return success
+		const response: ReCAPTCHAResponse = await fetch(
+				`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`, { method: "POST"})
+				.then(res => res.json())
+		console.error(response)
+		return response.success
 	}
 
 	async sendMail(data): Promise<SuccessfulResponse | EtherialResponse>{

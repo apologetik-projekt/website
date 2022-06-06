@@ -8,3 +8,10 @@ export interface EtherialResponse extends SuccessfulResponse {
 		url: string
 	}
 }
+
+export interface ReCAPTCHAResponse {
+  success: boolean,
+  challenge_ts: string,
+  hostname: string,
+  'error-codes': unknown[]
+}
