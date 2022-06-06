@@ -33,6 +33,10 @@ export default function ContactForm({recaptchaKey}) {
 		}
 	}, [fetcher])
 
+	useEffect(() => {
+		captchaRef?.current?.execute()
+	}, [])
+
 	return (
 		<div className="flex max-w-2xl flex-col mx-auto space-y-5 hyphens-auto mt-6">
 			<fetcher.Form ref={formRef} method="post" action="/api/email">
