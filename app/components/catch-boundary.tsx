@@ -13,7 +13,6 @@ export function CatchBoundary() {
     <html>
       <head>
         <title>{oops ? 'Oops!' : 'Vorübergehend nicht erreichbar!'}</title>
-        <link rel="stylesheet" href="/404.css" />
         <Meta />
         <Links />
       </head>
