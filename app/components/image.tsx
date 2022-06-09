@@ -16,7 +16,7 @@ interface Props {
 	loading?: 'lazy' | 'eager',
 }
 
-export function Image({ src, alt, className, loading, ...props }: Props) {
+export function Image({ src = "", alt, className, loading, ...props }: Props) {
 	return (
 		<img
 			src={getImageUrl(src)}

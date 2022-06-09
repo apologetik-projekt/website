@@ -4,7 +4,7 @@ import { useState } from "react"
 //TODO: Cleanup
 export default function Testimonials({quotes}){
 	return (
-		<div className="flex flex-col justify-center items-center space-y-10 md:space-y-0 md:space-x-6 bg-yellow-400 md:flex-row bg-opacity-75 px-5 py-12 md:p-8 md:pt-7 mt-6 -mx-4 md:-mx-8">
+		<div className="flex flex-col justify-center items-center space-y-10 md:space-y-0 md:space-x-6 bg-yellow-400 md:flex-row bg-opacity-75 px-5 py-12 md:p-8 md:pt-7 mt-12 -mx-4 md:-mx-8">
 			<Quotes quotes={quotes} />
 			<Socials />
 		</div>
