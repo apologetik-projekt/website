@@ -123,3 +123,8 @@ li::marker {
 	z-index: -1;
 	transform: translate(-1.25rem, -0.75rem) rotate(-5deg);
 }
+
+figure.image-style-side {
+  margin: 0 0 1.5rem 2rem;
+  float: right;
+}

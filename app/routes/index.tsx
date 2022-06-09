@@ -10,10 +10,6 @@ export const handle = {
   header: 'dark',
 }
 
-export const links = () => [
-  { rel: "preload", as: "image", href: "https://beta.apologetik-projekt.de/_next/image?url=%2Fconversation.jpg&w=640&q=75" },
-]
-
 
 export const loader: LoaderFunction = async ({ context }) => {
   const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)

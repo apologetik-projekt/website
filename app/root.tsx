@@ -23,6 +23,7 @@ import { useEffect } from "react"
 
 export const meta: MetaFunction = () => ({ 
   title: "Das Apologetik Projekt - Christliche Apologetik",
+  description: "Christentum - nicht nur schön, sondern auch wahr. Christen zurüsten. Zweiflern begegnen. Skeptikern antworten.",
   charset: "utf-8",
   viewport: "width=device-width,initial-scale=1"
 })
