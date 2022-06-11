@@ -106,7 +106,7 @@ li::marker {
 }
 
 .input-field {
-  @apply px-4 py-3 leading-tight placeholder:text-black/30;
+  @apply px-4 py-3 font-medium leading-tight placeholder:text-black/30;
   @apply bg-gray-400 bg-opacity-20 border-transparent;
   @apply appearance-none focus:border-yellow-500 focus:ring-yellow-500;
   @apply focus:bg-yellow-50 focus:text-yellow-900/80 focus:placeholder:text-yellow-900/50;
