@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useRef, useState } from "react"
 import { BASE_URL, ENV } from "../utils/constants"
 
-export function getImageUrl(image: string, params) {
+export function getImageUrl(image: string, params: string) {
 		if (!image.startsWith("https") || ENV == 'dev') return image
 		else return `https://images.weserv.nl/?url=${image}${params}`
 }
