@@ -36,7 +36,7 @@ export default function Slug() {
 
       {pageHeader?.showImage && (
         <div className='max-h-screen lg:-mx-[4.525rem] block mb-8 bg-black'>
-          <div className='aspect-16/9 w-full h-[45vh] bg-cover flex justify-center items-center' style={{backgroundImage: `url(${getImageUrl(pageHeader.image?.url, '')})`}}>
+          <div className='aspect-16/9 w-full h-[45vh] bg-cover flex justify-center items-center' style={{backgroundImage: `url(${getImageUrl(pageHeader.image?.url || '', '')})`}}>
             <h1 className='text-white font-mono text-center text-7xl font-extrabold uppercase drop-shadow'>{pageHeader.pageTitle}</h1>
           </div>
         </div>
