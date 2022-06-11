@@ -33,6 +33,7 @@ export default function Blog() {
 									alt={latestArticle.image?.alternativeText || ""}
 									height={400} width={400}
 									className="aspect-[4/3] md:aspect-square bg-black object-cover w-full shadow-sm rounded-px" 
+									placeholder={latestArticle.image?.placeholder}
 									src={latestArticle.image?.url ?? fallBackImage} />
 							</div>
 
@@ -60,7 +61,12 @@ export default function Blog() {
 						articles.slice(1).map((article, index) => (
 							<Link key={index} to={article.slug} className="hover:opacity-90 duration-200 flex flex-col md:flex-row">
 								<div className="md:w-4/12 md:mr-4 flex-shrink-0">
-									<Image alt={article.title} className="object-cover aspect-[16/11] w-full" src={article.image.url ?? fallBackImage} width={300} height={166} />
+									<Image 
+										alt={article.title} 
+										className="object-cover aspect-[16/11] w-full" 
+										src={article.image.url ?? fallBackImage} 
+										placeholder={article.image?.placeholder}
+										width={300} height={166} />
 								</div>
 								<div className="py-4 md:py-0.5 md:pt-0">
 									<h3 className="font-bold text-black font-mono leading-7 tracking-tighter text-[1.55rem] mb-1.5">{article.title}</h3>

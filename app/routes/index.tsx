@@ -30,7 +30,6 @@ export const loader: LoaderFunction = async ({ context }) => {
     __component: "page.testimonials",
     testimonials: testimonals
   })
-  console.log(data)
   return json(data)
 }
 
@@ -38,7 +37,7 @@ export default function Index() {
   const page = useLoaderData()
   return (
     <>
-      <Hero heading={page.pageHeader?.pageTitle} imageUrl={page.pageHeader?.image?.url} />
+      <Hero heading={page.pageHeader?.pageTitle} image={page.pageHeader?.image} />
       <main className="max-w-2xl mx-auto mt-24 px-5 pb-20 text-gray-900 break-words">
         {page.content?.map((block) => {
 
