@@ -10,13 +10,13 @@ interface Props {
 	className?: string,
 	src: string,
 	alt: string,
-	width?: number | string,
-	height?: number | string,
+	width?: number,
+	height?: number,
 	loading?: 'lazy' | 'eager',
 	placeholder?: string
 }
 
-export function Image({ src, alt, className, loading, placeholder, ...props }: Props) {
+export function Image({ src, alt, className, loading, width, height, placeholder, ...props }: Props) {
 	const styles: React.CSSProperties | undefined = placeholder ? {
 		backgroundImage: `url(${placeholder})`,
 		backgroundSize: 'contain',
@@ -33,8 +33,8 @@ export function Image({ src, alt, className, loading, placeholder, ...props }: P
 			imageRef.current.style.backgroundImage = ''
 		}
 	}
-	
-	const imageParams = `&w=${props.width}&h=${props.height}`
+
+	const imageParams = width && height ? `&w=${width*2}&h=${height*2}&a=center` : ''
 
 	return (
 		<div className="overflow-hidden">
@@ -44,8 +44,8 @@ export function Image({ src, alt, className, loading, placeholder, ...props }: P
 			style={placeholder ? styles : undefined}
 			alt={alt}
 			ref={imageRef}
-			height={props.height}
-			width={props.width}
+			height={height}
+			width={width}
 			className={className}
 			loading={loading}
 			{...props}

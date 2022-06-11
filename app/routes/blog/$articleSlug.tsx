@@ -41,7 +41,7 @@ export default function Article(){
 					className="object-cover bg-black origin-center w-full aspect-video" 
 					src={article?.image?.url}
 					placeholder={article?.image?.placeholder}
-					alt="Image" width="800" height="450" />
+					alt="Image" width={800} height={450} />
 			</div>
 			
 		 <section id="blog" className="prose-lg prose-headings:font-mono max-w-2xl mx-auto px-1 -mt-1 selection:bg-sky-300">
@@ -63,7 +63,7 @@ function Author({author, date}) {
 	const profileImage = author?.image?.url ?? `https://ui-avatars.com/api/?name=${author?.firstName}+${author?.lastName}&background=7cd3fc&color=22222c`
 	return (
 		<div className="flex items-center py-4 mt-2 -ml-0.5">
-			<Image alt="avatar" className="object-cover object-center border-2 border-transparent rounded-full h-10 w-10 mr-2" height="28px" width="28px" src={profileImage} />
+			<Image alt="avatar" className="object-cover object-center border-2 border-transparent rounded-full h-10 w-10 mr-2" height={40} width={40} src={profileImage} />
 			<p className="leading-none mt-1">
 				<span className="uppercase font-semibold text-gray-700 opacity-95">{author.firstName} {author.lastName}</span> <br />
 				<span className="text-sm font-medium text-gray-700 opacity-75 block">veröffentlicht am {new Date(date).toLocaleDateString()}</span>
