@@ -16,7 +16,7 @@ interface Props {
 	placeholder?: string
 }
 
-export function Image({ src = "", alt, className, loading, placeholder, ...props }: Props) {
+export function Image({ src, alt, className, loading, placeholder, ...props }: Props) {
 	const styles: React.CSSProperties | undefined = placeholder ? {
 		backgroundImage: `url(${placeholder})`,
 		backgroundSize: 'contain',
@@ -38,7 +38,7 @@ export function Image({ src = "", alt, className, loading, placeholder, ...props
 		<div className="overflow-hidden">
 		<img
 			onLoad={imageLoaded}
-			src={getImageUrl(src)}
+			src={getImageUrl(src ?? '')}
 			style={placeholder ? styles : undefined}
 			alt={alt}
 			ref={imageRef}

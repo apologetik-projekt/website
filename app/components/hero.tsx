@@ -43,7 +43,7 @@ export default ({heading, image}: Props) => (
 							className="m-0 bg-amber-500 saturate-[115%]" 
 							loading="eager"
 							placeholder={image?.placeholder}
-							src={image?.placeholder}/>
+							src={image?.url}/>
 					</motion.div>
 					<motion.div variants={textVariant} id="heading" initial="hidden" animate="show" className="-mt-6 sm:mt-10 md:w-3/5 md:min-w-[350px]">
 						<h1 className="leading-7 font-mono drop-shadow-sm text-xl relative z-10">{heading}</h1>
