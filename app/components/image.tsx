@@ -2,8 +2,7 @@ import React, { HTMLAttributes, useRef, useState } from "react"
 import { BASE_URL, ENV } from "../utils/constants"
 
 export function getImageUrl(image: string) {
-		if (image.startsWith("http")) return image
-		if (ENV == 'dev') return `http://127.0.0.1:1337${image}`
+		if (!image.startsWith("https") || ENV == 'dev') return image
 		else return `https://images.weserv.nl/?url=${BASE_URL}${image}`
 }
 
