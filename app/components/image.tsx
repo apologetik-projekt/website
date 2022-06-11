@@ -1,9 +1,9 @@
 import React, { HTMLAttributes, useRef, useState } from "react"
 import { BASE_URL, ENV } from "../utils/constants"
 
-export function getImageUrl(image: string) {
+export function getImageUrl(image: string, params) {
 		if (!image.startsWith("https") || ENV == 'dev') return image
-		else return `https://images.weserv.nl/?url=${image}`
+		else return `https://images.weserv.nl/?url=${image}${params}`
 }
 
 interface Props {
@@ -33,12 +33,14 @@ export function Image({ src, alt, className, loading, placeholder, ...props }: P
 			imageRef.current.style.backgroundImage = ''
 		}
 	}
+	
+	const imageParams = `&w=${props.width}&h=${props.height}`
 
 	return (
 		<div className="overflow-hidden">
 		<img
 			onLoad={imageLoaded}
-			src={getImageUrl(src ?? '')}
+			src={getImageUrl(src ?? '', imageParams)}
 			style={placeholder ? styles : undefined}
 			alt={alt}
 			ref={imageRef}
