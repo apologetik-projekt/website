@@ -3,7 +3,7 @@ import { BASE_URL, ENV } from "../utils/constants"
 
 export function getImageUrl(image: string, params: string) {
 		if (!image.startsWith("https") || ENV == 'dev') return image
-		else return `https://images.weserv.nl/?url=${image}${params}`
+		else return `https://images.weserv.nl/?url=${image}${params}&output=webp`
 }
 
 interface Props {
