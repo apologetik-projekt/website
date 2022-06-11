@@ -11,7 +11,6 @@ export async function action({ request, context }) {
 	})
 
 	// Check ReCAPTCHA
-	console.log(formData)
 	const isHuman = await frank.validateHuman(context.env.RECAPTCHA_SECRET_KEY, formData['g-recaptcha-response'])
 	if (!isHuman)	return json({error: 'Du bist ein Roboter! 🤖'}, {status: 406})
 

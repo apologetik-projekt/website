@@ -19,7 +19,7 @@ export default function ContactForm({recaptchaKey}) {
 	
 	const isSubmitting = fetcher.state == 'submitting'
 	const isActionCompleted = fetcher.type === 'done'
-	const isSucceeded = isActionCompleted && fetcher.data.ok
+	const isSucceeded = isActionCompleted && fetcher.data.status == "200"
 
 	function resetForm() {
 		formRef.current?.reset()
@@ -34,6 +34,7 @@ export default function ContactForm({recaptchaKey}) {
 	}, [fetcher])
 
 	useEffect(() => {
+		//@ts-ignore
 		captchaRef?.current?.execute()
 	}, [])
 
