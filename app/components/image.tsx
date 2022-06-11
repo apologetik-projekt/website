@@ -3,7 +3,7 @@ import { BASE_URL, ENV } from "../utils/constants"
 
 export function getImageUrl(image: string) {
 		if (!image.startsWith("https") || ENV == 'dev') return image
-		else return `https://images.weserv.nl/?url=${BASE_URL}${image}`
+		else return `https://images.weserv.nl/?url=${image}`
 }
 
 interface Props {
