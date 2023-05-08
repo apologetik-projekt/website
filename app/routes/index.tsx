@@ -4,18 +4,11 @@ import { Strapi } from "~/api/strapi"
 import Hero from "~/components/hero"
 import Testimonials from "~/components/testimonials"
 
-const testimonals = [{
-  name: "Miri",
-  text: "<p>Danke, f\u00fcr deine Arbeit und den guten Content! Ich feier es! Vor allem will ich es aber auch anwenden.<\/p>"
-},
-{
-  name: "Metin",
-  text: "<p>Ein Kumpel hat mir den Channel empfohlen. Starke erste Message! \ud83d\udd25 Bin gespannt was noch kommt.<\/p>"
-},
-  {
-    name: "Helena",
-    text: "<p>Echt interessant! Die Frage muss ich mir bei zuk\u00fcnftigen Evangelisationen merken \ud83d\ude2c<\/p>"
-}]
+const testimonals = [
+  "Ich bin auf die Wichtigkeit der Apologetik und als Erstes auf euren Channel gestoßen. Seither durfte ich schon so viel lernen und gehe definitiv selbstbewusster in Gespräche, weil ich weiß, dass ich mich nicht für dumm verkaufen lassen muss, weil ich Christin bin und glaube. Das Christentum – nicht nur schön, sondern auch wahr, mit guten Gründen!",
+  "Am Anfang des Glaubens war ich sehr unsicher, ob das alles wahr ist, was ich hier glaube oder ob es nur „gute Gefühle“ sind, in die man sich reinsteigert. Die Posts und Informationen von Apologetikprojekt haben mir sehr geholfen im Glauben fester zu werden und wirklich zu wissen, dass das Ganze wirklich wahr ist!",
+  "Gott sei Dank bin ich auf die wertvolle Arbeit vom Apologetik Projekt gestoßen. Hauptsächlich dank ihrer Videos und Beiträgen habe ich mich dermaßen weiterentwickelt. Ich habe jetzt keine Angst mehr vor Diskussionen mit Nichtchristen und mein Glaube steht auf einem deutlich festeren Fundament als früher.",
+]
 
 export const handle = {
   header: 'dark',
