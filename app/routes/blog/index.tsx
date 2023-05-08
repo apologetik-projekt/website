@@ -2,11 +2,10 @@ import { json, LoaderFunction, MetaFunction } from "@remix-run/cloudflare"
 import { Link, useLoaderData } from '@remix-run/react'
 import { Strapi } from "~/api/strapi"
 import { Image } from "~/components/image"
-const BASE_URL = 'http://localhost:1337'
 
 export const meta: MetaFunction = () => {
 	return {
-		title: "Apologetik Channel - Blog",
+		title: "Apologetik Projekt - Blog",
 	}
 }
 

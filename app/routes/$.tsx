@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({ context, params }) => {
 }
 
 export default function Slug() {
-  const {pageHeader, content, env} = useLoaderData()
+  const { pageHeader, content, env } = useLoaderData()
 
   return (
     <main className="max-w-4xl mx-auto px-5 pt-5 pb-10">
@@ -36,7 +36,7 @@ export default function Slug() {
 
       {pageHeader?.showImage && (
         <div className='max-h-screen lg:-mx-[4.525rem] block mb-8 bg-black'>
-          <div className='aspect-16/9 w-full h-[45vh] bg-cover flex justify-center items-center' style={{backgroundImage: `url(${getImageUrl(pageHeader.image?.url || '', '')})`}}>
+          <div className='aspect-16/9 w-full h-[45vh] bg-cover flex justify-center items-center' style={{ backgroundImage: `url(${getImageUrl(pageHeader.image?.url || '', '')})` }}>
             <h1 className='text-white font-mono text-center text-7xl font-extrabold uppercase drop-shadow'>{pageHeader.pageTitle}</h1>
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function Slug() {
         // *** SNIPPET ***
         if (block.__component === "page.snippets") {
           if (block.name == "contact_form") {
-            return <ContactForm recaptchaKey={env.RECAPTCHA_PUBLIC_KEY} key={block.id}  />
+            return <ContactForm recaptchaKey={env.RECAPTCHA_PUBLIC_KEY} key={block.id} />
           }
         }
 
