@@ -14,10 +14,13 @@ export default class FrankClient {
 	}
 
 	public async validateHuman(secret: string, token: string): Promise<boolean> {
-		const response: ReCAPTCHAResponse = await fetch(
+		const response = await fetch(
 				`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`, { method: "POST"})
 				.then(res => res.json())
-		console.error(response)
+				.catch(err => { 
+					console.error(response)
+					throw err 
+				}) as ReCAPTCHAResponse
 		return response.success
 	}
 
@@ -38,7 +41,7 @@ export default class FrankClient {
 		})
 
 		if (mail.status === HttpStatusCode.OK && this.secret.includes('test')) {
-			const { messageId, url } = await mail.json()
+			const { messageId, url } = await mail.json() as any
 			return { status: HttpStatusCode.OK, etherial: { messageId, url } }
 		}
 

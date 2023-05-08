@@ -10,7 +10,10 @@ export class Strapi extends HTTPClient{
 	}
 
 	public async fetch(query: string): Promise<StrapiResponse> {
-		return await this.client.get(query).json() as StrapiResponse
+		return await this.client.get(query).json().catch(err => {
+			console.error(err)
+			throw err
+		}) as StrapiResponse
 	}
 
 	// public async getPage(slug: string): Promise<PageData> {
