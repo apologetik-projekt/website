@@ -40,7 +40,7 @@ function Maintenance() {
           Komme gerne später nochmal vorbei.
         </p>
         <p className="md:text-center break-normal mt-4 md:mt-2">
-          In der Zwischenzeit kannst du auf <a className="font-medium text-black underline underline-offset-1 transition-colors hover:text-blue-800" target="_blank" href="https://instagram.com">Instagram</a> oder <a className="font-medium text-black underline underline-offset-1 transition-colors hover:text-blue-800" target="_blank" href="https://youtube.com">YouTube</a> mehr über die Arbeit des Apologetik Projekts erfahren.
+          In der Zwischenzeit kannst du auf <a className="font-medium text-black underline underline-offset-1 transition-colors hover:text-blue-800" target="_blank" href="https://instagram.com/apologetikprojekt">Instagram</a> oder <a className="font-medium text-black underline underline-offset-1 transition-colors hover:text-blue-800" target="_blank" href="https://www.youtube.com/@ApologetikProjekt">YouTube</a> mehr über die Arbeit des Apologetik Projekts erfahren.
         </p>
       </section>
     </div>
