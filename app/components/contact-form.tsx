@@ -40,7 +40,7 @@ export default function ContactForm({recaptchaKey}) {
 
 	return (
 		<div className="flex max-w-2xl flex-col mx-auto space-y-5 hyphens-auto mt-6">
-			<fetcher.Form ref={formRef} method="post" action="/api/email">
+			<fetcher.Form ref={formRef} method="POST" action="/api/email">
 
 				{isActionCompleted ? (
 					isSucceeded ? (

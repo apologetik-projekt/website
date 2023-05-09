@@ -1,5 +1,5 @@
 import { json, LoaderFunction } from "@remix-run/cloudflare"
-import { Outlet, useLoaderData } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 import { Strapi } from "~/api/strapi"
 import Hero from "~/components/hero"
 import Testimonials from "~/components/testimonials"
