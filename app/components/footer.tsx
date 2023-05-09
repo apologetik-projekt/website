@@ -13,7 +13,7 @@ export default function Footer(){
 					
 					<div className="w-full sm:w-3/5 flex flex-col sm:items-end mt-4 sm:mt-0 mr-1">
 						<ul className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-5">
-							<li><Link to="/about/team" className="opacity-80 hover:opacity-90 hover:border-b border-white">Über uns</Link></li>
+							<li><Link to="/wer-wir-sind" className="opacity-80 hover:opacity-90 hover:border-b border-white">Über uns</Link></li>
 							<li><Link to="/kontakt" className="opacity-80 hover:opacity-90 hover:border-b border-white">Kontakt</Link></li>
 							<li><Link to="/impressum" className="opacity-80 hover:opacity-90 hover:border-b border-white">Impressum</Link></li>
 							<li><Link to="/datenschutz" className="opacity-80 hover:opacity-90 hover:border-b border-white">Datenschutz</Link></li>
