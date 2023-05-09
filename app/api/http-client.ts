@@ -6,11 +6,11 @@ import { ENV } from "~/utils/constants"
 
 export class HTTPClient {
 	public client: KyInstance
-	private credentials = { credentials: undefined }
+	//private credentials = { credentials: undefined }
 	constructor(config) {
 		this.client = ky.extend({
 			prefixUrl: config.base_url,
-			credentials: undefined,
+			//credentials: undefined,
 			hooks: {
 				beforeRequest: [
 					request => {
