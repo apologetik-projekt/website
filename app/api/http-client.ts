@@ -10,7 +10,7 @@ export class HTTPClient {
 	constructor(config) {
 		this.client = ky.extend({
 			prefixUrl: config.base_url,
-			//credentials: undefined,
+			credentials: undefined,
 			hooks: {
 				beforeRequest: [
 					request => {
