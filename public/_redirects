@@ -1,3 +1,4 @@
 /home / 301
 /login https://strapi.apologetik-projekt.de/admin 302
 /analytics https://anna.apologetik-projekt.de/apologetik-projekt.de
+/anna/* https://anna.apologetik-projekt.de/:splat
