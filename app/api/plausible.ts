@@ -2,7 +2,7 @@ import Plausible from 'plausible-tracker'
 
 const client = Plausible({
   domain: 'apologetik-projekt.de',
-	apiHost: 'https://apologetik-projekt.de/anna',
+	apiHost: 'https://apologetik-projekt.de',
 })
 
 export default client
