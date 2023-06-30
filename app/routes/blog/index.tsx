@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async ({context}) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
-	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description')
+	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&sort[0]=date')
 
 	return json(articles)
 }
