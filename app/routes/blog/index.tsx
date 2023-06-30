@@ -77,7 +77,7 @@ export default function Blog() {
 									</div>
 									<p className="text-gray-600 relative h-[72px] overflow-hidden">
 										{article.description}
-										<Link to={`/blog/${latestArticle.slug}`} className="absolute bottom-0 bg-gradient-to-r pl-28 pt-1.5 pr-px from-gray-100/0 via-[#FAFAFA] to-[#FAFAFA] right-0 z-10 text-sky-700 font-medium inline-block ml-1 hover:text-blue-800 cursor:pointer">Mehr lesen&#x2009;&rarr;</Link>
+										<span className="absolute bottom-0 bg-gradient-to-r pl-28 pt-1.5 pr-px from-gray-100/0 via-[#FAFAFA] to-[#FAFAFA] right-0 z-10 text-sky-700 font-medium inline-block ml-1 hover:text-blue-800 cursor:pointer">Mehr lesen&#x2009;&rarr;</span>
 									</p>
 								</div>
 							</Link>
