@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async ({context}) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
-	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description')
+	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&sort[0]=date%3Adesc')
 
 	return json(articles)
 }
@@ -69,7 +69,16 @@ export default function Blog() {
 								</div>
 								<div className="py-4 md:py-0.5 md:pt-0">
 									<h3 className="font-bold text-black font-mono leading-7 tracking-tighter text-[1.55rem] mb-1.5">{article.title}</h3>
-									<p className="text-gray-600">{article.description}</p>
+									<div className="mt-2 mb-3 flex items-center">
+										<Image 
+											className="rounded-full overflow-hidden mr-2 bg-blue-400"
+											src={latestArticle.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
+										<span className="text-gray-800 leading-relaxed">{latestArticle.author.firstName} {latestArticle.author.lastName}</span>
+									</div>
+									<p className="text-gray-600 relative h-[72px] overflow-hidden">
+										{article.description}
+										<Link to={`/blog/${latestArticle.slug}`} className="absolute bottom-0 bg-gradient-to-r pl-28 pt-1.5 pr-px from-gray-100/0 via-[#FAFAFA] to-[#FAFAFA] right-0 z-10 text-sky-700 font-medium inline-block ml-1 hover:text-blue-800 cursor:pointer">Mehr lesen&#x2009;&rarr;</Link>
+									</p>
 								</div>
 							</Link>
 						))
