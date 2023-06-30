@@ -69,7 +69,7 @@ export default function Blog() {
 								</div>
 								<div className="py-4 md:py-0.5 md:pt-0">
 									<h3 className="font-bold text-black font-mono leading-7 tracking-tighter text-[1.55rem] mb-1.5">{article.title}</h3>
-									<div className="my-1.5 flex items-center">
+									<div className="mt-2 mb-3 flex items-center">
 										<Image 
 											className="rounded-full overflow-hidden mr-2 bg-blue-400"
 											src={latestArticle.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
