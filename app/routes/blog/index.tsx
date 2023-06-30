@@ -75,7 +75,7 @@ export default function Blog() {
 											src={latestArticle.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
 										<span className="text-gray-800 leading-relaxed">{latestArticle.author.firstName} {latestArticle.author.lastName}</span>
 									</div>
-									<p className="text-gray-600 relative">
+									<p className="text-gray-600 relative h-[72px] overflow-hidden">
 										{article.description}
 										<Link to={`/blog/${latestArticle.slug}`} className="absolute bottom-0 bg-gradient-to-r pl-28 pt-1.5 from-gray-100/0 via-[#FAFAFA] to-[#FAFAFA] right-0 z-10 text-sky-700 font-medium inline-block ml-1 hover:text-blue-800 cursor:pointer">Mehr lesen&#x2009;&rarr;</Link>
 									</p>
