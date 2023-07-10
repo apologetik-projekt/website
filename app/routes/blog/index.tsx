@@ -72,8 +72,8 @@ export default function Blog() {
 									<div className="mt-2 mb-3 flex items-center">
 										<Image 
 											className="rounded-full overflow-hidden mr-2 bg-blue-400"
-											src={latestArticle.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
-										<span className="text-gray-800 leading-relaxed">{latestArticle.author.firstName} {latestArticle.author.lastName}</span>
+											src={article.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
+										<span className="text-gray-800 leading-relaxed">{article.author.firstName} {article.author.lastName}</span>
 									</div>
 									<p className="text-gray-600 relative h-[72px] overflow-hidden">
 										{article.description}
