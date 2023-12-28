@@ -75,6 +75,7 @@ export default function App() {
         <meta charSet="utf-8"/>
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <meta httpEquiv="Accept-CH" content="Viewport-Width, Sec-CH-Viewport-Width" />
         <Meta />
         <Links />
       </head>

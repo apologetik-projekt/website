@@ -1,25 +1,81 @@
-import { useCallback, useSyncExternalStore } from "react"
+import { useLayoutEffect, useState } from "react"
 
-export function useMediaQuery(query: string, defaultSSRValue = false) {
-	const subscribe = useCallback(
-			(callback: any) => {
-					const matchMedia = window.matchMedia(query);
+export type UseMediaQueryOptions = {
+  fallback?: boolean | boolean[]
+  ssr?: boolean
+}
 
-					matchMedia.addEventListener("change", callback);
-					return () => {
-							matchMedia.removeEventListener("change", callback);
-					};
-			},
-			[query]
-	)
+function getWindow(): Window {
+	return globalThis.window
+}
 
-	const getSnapshot = () => {
-			return window.matchMedia(query).matches;
-	}
+/**
+ * React hook that tracks state of a CSS media query
+ *
+ * @param query the media query to match
+ * @param options the media query options { fallback, ssr }
+ *
+ * @see Docs https://chakra-ui.com/docs/hooks/use-media-query
+ */
+export function useMediaQuery(
+  query: string | string[],
+  options: UseMediaQueryOptions = {},
+): boolean[] {
+  const { ssr = true, fallback } = options
 
-	const getServerSnapshot = () => {
-			return defaultSSRValue
-	}
+  const queries = Array.isArray(query) ? query : [query]
 
-	return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+  let fallbackValues = Array.isArray(fallback) ? fallback : [fallback]
+  fallbackValues = fallbackValues.filter((v) => v != null) as boolean[]
+
+  const [value, setValue] = useState(() => {
+    return queries.map((query, index) => ({
+      media: query,
+      matches: ssr
+        ? !!fallbackValues[index]
+        : getWindow().matchMedia(query).matches,
+    }))
+  })
+
+  useLayoutEffect(() => {
+    const win = getWindow()
+    setValue(
+      queries.map((query) => ({
+        media: query,
+        matches: win.matchMedia(query).matches,
+      })),
+    )
+
+    const mql = queries.map((query) => win.matchMedia(query))
+
+    const handler = (evt: MediaQueryListEvent) => {
+      setValue((prev) => {
+        return prev.slice().map((item) => {
+          if (item.media === evt.media) return { ...item, matches: evt.matches }
+          return item
+        })
+      })
+    }
+
+    mql.forEach((mql) => {
+      if (typeof mql.addListener === "function") {
+        mql.addListener(handler)
+      } else {
+        mql.addEventListener("change", handler)
+      }
+    })
+
+    return () => {
+      mql.forEach((mql) => {
+        if (typeof mql.removeListener === "function") {
+          mql.removeListener(handler)
+        } else {
+          mql.removeEventListener("change", handler)
+        }
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getWindow])
+
+  return value.map((item) => item.matches)
 }
