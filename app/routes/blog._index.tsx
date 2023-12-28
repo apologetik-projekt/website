@@ -2,7 +2,7 @@ import { json, LoaderFunction, MetaFunction } from "@remix-run/cloudflare"
 import { Link, NavLink, unstable_useViewTransitionState, useLoaderData } from '@remix-run/react'
 import { Strapi } from "~/api/strapi"
 import { Image } from "~/components/image"
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react"
+import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react"
 import { useMediaQuery } from "~/utils/use-media-query"
 import { Masonry } from "~/components/masonry"
 
@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 export const loader = async ({ context }) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
 	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&sort[0]=date%3Adesc')
-
+	console.log(articles[0])
 	return json(articles)
 }
 
@@ -37,7 +37,7 @@ export default function Blog() {
 							</svg>
 							<span className="uppercase leading-tight font-bold">Neuster Artikel</span>
 								<span className="text-sm leading-snug">
-									<span className="leading-relaxed">- {latestArticle.author.firstName} {latestArticle.author.lastName}</span> <span className="opacity-75">•</span> {Math.ceil(Math.random()*10)}&#x200A;min
+									<span className="leading-relaxed">- {latestArticle.author.firstName} {latestArticle.author.lastName}</span> <span className="opacity-75">•</span> 11&#x200A;min
 								</span>
 						</div>
 						
@@ -63,6 +63,7 @@ export default function Blog() {
 }
 
 function Article({article}) {
+	const readingTime = useMemo(() => Math.ceil(Math.random()*18), [])
 	const isTransitioning = unstable_useViewTransitionState(article.slug)
 
 	function getViewTransitionName(name: string) {
@@ -78,6 +79,7 @@ function Article({article}) {
 						className="object-cover aspect-[27.5/17] w-full" 
 						src={article.image.url ?? fallBackImage} 
 						placeholder={article.image?.placeholder}
+						loading="lazy"
 						width={300} height={166} />
 						<div className="p-2 h-12 flex items-center -mt-12">
 							<div className="flex items-center px-2 py-1 rounded-full backdrop-blur-md bg-black/40" style={{ viewTransitionName: getViewTransitionName("author"), width: "max-content"}}>
@@ -88,7 +90,7 @@ function Article({article}) {
 										src={article.author?.image?.url} alt="Avatar" aria-hidden width={22} height={22} />
 								</div>
 								<span className="text-white/90 text-sm font-light leading-snug mx-1.5 mr-1 tabular-nums">
-									<span className="leading-relaxed">{article.author.firstName} {article.author.lastName}</span> • {Math.ceil(Math.random()*10)}&#x200A;min
+									<span className="leading-relaxed">{article.author.firstName} {article.author.lastName}</span> • {readingTime}&#x200A;min
 								</span>
 							</div>
 						</div>
