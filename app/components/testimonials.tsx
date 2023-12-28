@@ -39,8 +39,8 @@ function Quotes({quotes}){
 				))}
 				</AnimatePresence>
 			</div>
-			<button className="float-right no-tap mr-4 block bottom-0 right-0 absolute z-30 bg-yellow-600 bg-opacity-50 hover:bg-opacity-40 rounded-full h-10 w-10 active:bg-opacity-60" onClick={handleClick} style={{marginTop: items.length*5 + 4}}>
-				<svg className="text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+			<button aria-label="Next" className="float-right no-tap mr-4 block bottom-0 right-0 absolute z-30 bg-yellow-600 bg-opacity-50 hover:bg-opacity-40 rounded-full h-10 w-10 active:bg-opacity-60" onClick={handleClick} style={{marginTop: items.length*5 + 4}}>
+				<svg aria-hidden className="text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
 			</button>
 		</section>
 	)
