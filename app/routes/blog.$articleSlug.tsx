@@ -30,7 +30,7 @@ export default function Article(){
 	const article = useLoaderData<any>()
 
 	return (	
-		<article className="max-w-4xl mx-auto p-4 pb-10">
+		<article className="max-w-4xl mx-auto p-4 pb-10 w-full">
 			<header className="max-w-2xl mx-auto">
 				<h1 className="font-extrabold md:text-balance font-mono text-5xl md:text-7xl md:pt-2 relative z-30" style={{ viewTransitionName: "title"}}>{article?.title}</h1>
 				<Author author={article?.author} date={article?.date} />	
