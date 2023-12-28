@@ -41,11 +41,20 @@ blockquote > *:first-child {
 	}
 }
 
-/* Your own custom utilities */
-body {
-	@apply bg-gray-50
+@media (prefers-reduced-motion) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 
+body {
+	@apply bg-gray-50;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'cv10' 1, 'tnum' 1;
+}
+
+/* Your own custom utilities */
 .radial-gradient {
   background: url(/gradient.svg);
 }

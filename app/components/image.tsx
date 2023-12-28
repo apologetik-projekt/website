@@ -1,8 +1,7 @@
-import React, { HTMLAttributes, useRef, useState } from "react"
-import { BASE_URL } from "../utils/constants"
+import React, { CSSProperties, useRef } from "react"
 
 export function getImageUrl(image: string, params: string) {
-		if (!image.startsWith("https")) return image
+		if (!image.startsWith("https")) return "http://127.0.0.1:1337"+image
 		else return `https://images.weserv.nl/?url=${image}${params}&output=webp`
 }
 
@@ -14,6 +13,7 @@ interface Props {
 	height?: number,
 	loading?: 'lazy' | 'eager',
 	placeholder?: string
+	style?: CSSProperties
 }
 
 export function Image({ src, alt, className, loading, width, height, placeholder, ...props }: Props) {
@@ -24,6 +24,7 @@ export function Image({ src, alt, className, loading, width, height, placeholder
 		overflow: 'hidden',
 		transition: 'filter',
 		transitionDuration: '0.2s',
+		...props.style,
 	} : undefined
 	
 	const imageRef = useRef<HTMLImageElement>(null)

@@ -1,16 +1,10 @@
-import { json, LoaderFunction, redirect } from '@remix-run/cloudflare'
+import { json } from '@remix-run/react'
 import { useLoaderData } from '@remix-run/react'
-import type { PageData } from '~/types/kirby'
 import ContactForm from '~/components/contact-form'
-//import Member from '~/components/member'
 import { Strapi } from '~/api/strapi'
 import { getImageUrl } from '~/components/image'
 
-interface LoaderData extends PageData {
-  env: any
-}
-
-export const loader: LoaderFunction = async ({ context, params }) => {
+export const loader = async ({ context, params }) => {
   const slugArray = params["*"]?.split("/")
   const slug = slugArray?.[slugArray.length - 1]
 
@@ -19,13 +13,13 @@ export const loader: LoaderFunction = async ({ context, params }) => {
 
   const env = {
     RECAPTCHA_PUBLIC_KEY: context.env.RECAPTCHA_PUBLIC_KEY
-  }
+  } as const
 
   return json({ ...page.data, env })
 }
 
 export default function Slug() {
-  const { pageHeader, content, env } = useLoaderData()
+  const { pageHeader, content, env } = useLoaderData<typeof loader>()
 
   return (
     <main className="max-w-4xl mx-auto px-5 pt-5 pb-10">

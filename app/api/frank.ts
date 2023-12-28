@@ -48,4 +48,3 @@ export default class FrankClient {
 		return { status: mail.status }
 	}
 }
-

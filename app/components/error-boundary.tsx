@@ -1,12 +1,16 @@
-import { Link, Links, Meta, useCatch } from "@remix-run/react"
+import { Link, Links, Meta, isRouteErrorResponse, useRouteError } from "@remix-run/react"
 import HttpStatusCode from "~/types/http_status_code"
 import clsx from "clsx"
 
-export function CatchBoundary() {
-  const caught = useCatch()
-  const oops = caught.status !== HttpStatusCode.SERVICE_UNAVAILABLE
+export function ErrorBoundary() {
+  const error = useRouteError()
+  if (!isRouteErrorResponse(error)) {
+    throw error
+  }
 
-	const notFound = caught?.status === HttpStatusCode.NOT_FOUND
+  const oops = error.status !== HttpStatusCode.SERVICE_UNAVAILABLE
+
+	const notFound = error?.status === HttpStatusCode.NOT_FOUND
 	if (notFound) return <Status404 />
 
   return (
@@ -20,7 +24,7 @@ export function CatchBoundary() {
         <main className="h-full p-5 md:p-8 bg-white shadow-sm rounded">
           {
             oops 
-            ? <h1 className="font-bold text-3xl">{caught.status} - {caught.statusText}</h1>
+            ? <h1 className="font-bold text-3xl">{error.status} - {error.statusText}</h1>
             : <Maintenance />
           }
         </main>
