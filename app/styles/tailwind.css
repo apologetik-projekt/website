@@ -137,3 +137,14 @@ figure.image-style-side {
   margin: 0 0 1.5rem 2rem;
   float: right;
 }
+
+.hyphens {
+  word-break: break-word; 
+}
+
+@supports (hyphenate-limit-chars: auto) {
+  .hyphens {
+    hyphens: auto;
+    hyphenate-limit-chars: 8 8 2;
+  }
+}
