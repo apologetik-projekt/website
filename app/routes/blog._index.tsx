@@ -56,7 +56,7 @@ export default function Blog() {
 					</div>
 				</div>
 			</section> */}
-			<main className="max-w-5xl mx-auto px-4 md:px-2 mt-8 pb-10">
+			<main className="max-w-5xl mx-auto px-4 md:px-2 mt-8 pb-10 w-full">
 				<Masonry className="md:gap-x-4 lg:gap-x-16" rowClassName="gap-y-6 md:gap-y-8">
 						{
 							articles.map((article, index) => (

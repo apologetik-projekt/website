@@ -1,2 +1,0 @@
-compatibility_date = "2023-12-28"
-compatibility_flags = [ "transformstream_enable_standard_constructor", "streams_enable_constructors" ]
