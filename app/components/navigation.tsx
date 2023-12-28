@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function Navigation({background = "light", navigation}: Props) {
-	const activeStyles = `bg-gray-300 ${background == 'dark' ? 'bg-opacity-10' : 'bg-opacity-70'}`
+	const activeStyles = `bg-gray-600/20 ${background == 'dark' ? 'bg-opacity-10' : 'bg-opacity-70'}`
 	const hasDarkBackground = background == 'dark'
 
 	function hasChildren(item: NavigationItem) {

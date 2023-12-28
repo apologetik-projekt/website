@@ -31,8 +31,8 @@ export default function Article(){
 
 	return (	
 		<article className="max-w-4xl mx-auto p-4 pb-10">
-			<header className="max-w-2xl mx-auto px-1">
-				<h1 className="font-extrabold md:text-balance font-mono text-5xl md:text-7xl md:pt-2" style={{ viewTransitionName: "title"}}>{article?.title}</h1>
+			<header className="max-w-2xl mx-auto">
+				<h1 className="font-extrabold md:text-balance font-mono text-5xl md:text-7xl md:pt-2 relative z-30" style={{ viewTransitionName: "title"}}>{article?.title}</h1>
 				<Author author={article?.author} date={article?.date} />	
 			</header>
 

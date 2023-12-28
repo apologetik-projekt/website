@@ -49,6 +49,12 @@ blockquote > *:first-child {
   }
 }
 
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 60ms;
+}
+
 body {
 	@apply bg-gray-50;
   font-feature-settings: 'liga' 1, 'calt' 1, 'cv10' 1, 'tnum' 1;

@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function Masonry(props: React.PropsWithChildren<Props>) {
-	const isDesktop = useMediaQuery(props.mediaQuery ?? "only screen and (min-width: 768px)", { fallback: true })
+	const [isDesktop] = useMediaQuery(props.mediaQuery ?? "only screen and (min-width: 768px)", { fallback: true })
 	const items = Children.toArray(props.children)
 
 	if (isDesktop) {

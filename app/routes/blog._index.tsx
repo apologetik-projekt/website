@@ -21,45 +21,38 @@ export const loader = async ({ context }) => {
 const fallBackImage = "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
 export default function Blog() {
 	const articles = useLoaderData() as any as any[]
-	
-
 	const latestArticle = articles[0]
+	const isTransitioning = unstable_useViewTransitionState(latestArticle.slug)
+	const [isDesktop] = useMediaQuery("only screen and (min-width: 768px)", { fallback: true })
+	const viewTransitionName = (isTransitioning && !isDesktop) ? "title" : undefined
 
 	return (
 		<>
-			{/* <section id="latestArticle" className="bg-opacity-90 w-full -mt-28 pt-8" style={{backgroundImage: 'url(/bg_paper_light.webp)'}}>
-				<div className="max-w-4xl mx-auto mt-20 md:mt-8 md:bg-white md:shadow-lg rounded-px md:translate-y-14">
-					<div className="flex flex-col md:flex-row mb-4">
-							<div id="article_thumbnail" className="md:w-5/12 flex-shrink-0 p-5">
-								<Image
-									alt={latestArticle.image?.alternativeText || ""}
-									height={400} width={400}
-									className="aspect-[4/3] md:aspect-square bg-black object-cover w-full shadow-sm rounded-px" 
-									placeholder={latestArticle.image?.placeholder}
-									src={latestArticle.image?.url ?? fallBackImage} />
-							</div>
-
-							<div id="article_text" className="md:w-7/12 pt-2 md:pt-8 px-5 md:px-3 pb-8" style={{ flexBasis: "100%" }}>
-								<h2 className="font-extrabold font-mono leading-none text-5xl tracking-tighter">
-									<Link to={`/blog/${latestArticle.slug}`}>{latestArticle.title}</Link>
-								</h2>
-								<div className="my-4 flex items-center">
-									<Image 
-										className="rounded-full overflow-hidden mr-2 bg-blue-400"
-										src={latestArticle.author?.image?.url} alt="Avatar" aria-hidden width={24} height={24} />
-									<span className="text-gray-800 leading-relaxed">{latestArticle.author.firstName} {latestArticle.author.lastName}</span>
-								</div>
-								<p className="text-gray-900 leading-snug text-lg mr-1">
-									{latestArticle.description}
-								</p>
-							</div>
+			<section className="w-full bg-cover bg-[center_top_33%] text-black -mt-24" style={{ backgroundImage: `url(${latestArticle.image.url})` }}>
+				<div className="pt-20 pb-8 md:pt-28 md:pb-16 bg-gradient-to-b from-[#ffe16cbf] to-gray-50 bg-blend-hard-light saturate-75">
+					<div className="max-w-5xl mx-auto mt-16 px-4 md:px-1">	
+						<div className="select-none text-sm mb-1 text-black/80 flex items-center gap-1">
+							<svg width="9" height="14" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M4.5 5H8L3.5 11.5V7H0L4.5 0.5V5Z" fill="currentColor"/>
+							</svg>
+							<span className="uppercase leading-tight font-bold">Neuster Artikel</span>
+								<span className="text-sm leading-snug">
+									<span className="leading-relaxed">- {latestArticle.author.firstName} {latestArticle.author.lastName}</span> <span className="opacity-75">•</span> {Math.ceil(Math.random()*10)}&#x200A;min
+								</span>
+						</div>
+						
+						<Link to={latestArticle.slug} className="hover:underline" unstable_viewTransition>
+							<h2 style={{ viewTransitionName, animationDuration: isDesktop ? "0s !important" : "auto" }} className="font-extrabold text-5xl font-mono mb-4 relative z-30">{latestArticle.title}</h2>
+						</Link>
+						<p className="max-w-4xl text-pretty text-opacity-85 font-light">{latestArticle.description}</p>
+						
 					</div>
 				</div>
-			</section> */}
+			</section>
 			<main className="max-w-5xl mx-auto px-4 md:px-2 mt-8 pb-10 w-full">
 				<Masonry className="md:gap-x-4 lg:gap-x-16" rowClassName="gap-y-6 md:gap-y-8">
 						{
-							articles.map((article, index) => (
+							articles.filter((_, i) => i != 0).map((article, index) => (
 								<Article key={index} article={article} />
 							))
 						}
@@ -91,7 +84,7 @@ function Article({article}) {
 								<div className="-translate-x-[3px]">
 									<Image 
 										style={{ viewTransitionName: getViewTransitionName("author-image") }}
-										className="rounded-full overflow-hidden bg-blue-400"
+										className="rounded-full overflow-hidden bg-blue-400 aspect-square"
 										src={article.author?.image?.url} alt="Avatar" aria-hidden width={22} height={22} />
 								</div>
 								<span className="text-white/90 text-sm font-light leading-snug mx-1.5 mr-1 tabular-nums">
