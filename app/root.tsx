@@ -53,6 +53,7 @@ export const loader = async ({ context }) => {
 export default function App() {
   const { navigation } = useLoaderData<typeof loader>() as any as { navigation: NavigationItem[] }
   const location = useLocation()
+  const isBlogRoute = location.pathname.includes("blog")
   const matches = useMatches()
   const currentHandle = matches?.[matches.length - 1]?.handle
   const headerTheme = currentHandle ? currentHandle["header"] : "light"  
@@ -78,7 +79,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className={`bg-gray-50 ${isBlogRoute ? "dark:bg-gray-900" : ""} min-h-screen flex flex-col`}>
         <MobileNavigation navigation={navigation}/>
         <Navigation navigation={navigation} background={headerTheme}/> 
         <Outlet />

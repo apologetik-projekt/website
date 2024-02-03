@@ -42,7 +42,7 @@ export default ({heading, image}: Props) => (
 							width={675} height={450}
 							className="m-0 bg-amber-500 saturate-[115%]" 
 							loading="eager"
-							placeholder={image?.placeholder}
+							blurDataURL={image?.placeholder}
 							src={image?.url}/>
 					</motion.div>
 					<motion.div variants={textVariant} id="heading" initial="hidden" animate="show" className="-mt-6 sm:mt-10 md:w-3/5 md:min-w-[350px]">

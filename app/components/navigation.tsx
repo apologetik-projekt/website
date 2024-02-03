@@ -1,4 +1,4 @@
-import { NavLink, Link } from '@remix-run/react'
+import { NavLink, Link, useNavigation, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 import { NavigationItem } from '~/types/navigation'
 
@@ -8,6 +8,7 @@ interface Props {
 }
 
 export default function Navigation({background = "light", navigation}: Props) {
+	const isBlogRoute = useLocation().pathname.includes("blog")
 	const activeStyles = `bg-gray-600/20 ${background == 'dark' ? 'bg-opacity-10' : 'bg-opacity-70'}`
 	const hasDarkBackground = background == 'dark'
 
@@ -22,9 +23,9 @@ export default function Navigation({background = "light", navigation}: Props) {
 	}
 
 	return(
-		<nav className={`w-full font-mono relative z-10 max-w-5xl mx-auto py-6 px-4 sm:px-5 md:pl-7 lg:px-0 select-none flex justify-between items-center ${background == 'dark' ? 'text-gray-100' : ''}`}>
+		<nav className={`w-full font-mono relative z-30 max-w-5xl mx-auto py-6 px-4 sm:px-5 md:pl-7 lg:px-0 select-none flex justify-between items-center ${background == 'dark' ? 'text-gray-100' : ''} ${isBlogRoute ? "dark:text-gray-100" : ""}`}>
 			<Link prefetch='render' to="/" className="md:translate-y-1.5 ml-1 no-tap active:sepia">
-				<img height={28} width={68} className={clsx({invert: hasDarkBackground})} src="/logo.svg" alt="Apologetik Projekt - Logo" />
+				<img height={40.58} width={68} className={clsx({invert: hasDarkBackground, "dark:invert": isBlogRoute })} src="/logo.svg" alt="Apologetik Projekt - Logo" />
 			</Link>
 			<ul className="hidden md:flex space-x-2 leading-none items-start font-medium uppercase text-nav #text-gray-200">
 				{navigation.map((item)=>(

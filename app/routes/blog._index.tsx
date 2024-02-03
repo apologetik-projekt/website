@@ -13,8 +13,7 @@ export const meta: MetaFunction = () => {
 
 export const loader = async ({ context }) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
-	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&sort[0]=date%3Adesc')
-	console.log(articles[0])
+	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&fields[3]=readingTime&sort[0]=date%3Adesc')
 	return json(articles)
 }
 
@@ -28,16 +27,16 @@ export default function Blog() {
 
 	return (
 		<>
-			<section className="w-full bg-cover bg-[center_top_33%] text-black -mt-24" style={{ backgroundImage: `url(${latestArticle.image.url})` }}>
-				<div className="pt-20 pb-8 md:pt-28 md:pb-16 bg-gradient-to-b from-[#ffe16cbf] to-gray-50 bg-blend-hard-light saturate-75">
+			<section className="w-full bg-cover bg-[center_top_33%] text-black dark:text-white -mt-24" style={{ backgroundImage: `url(${latestArticle.image.url})` }}>
+				<div className="pt-20 pb-8 md:pt-28 md:pb-16 bg-gradient-to-b from-[#ffe16cbf] dark:from-[#5b4b0cd6] to-gray-50 dark:to-gray-900 bg-blend-hard-light saturate-75">
 					<div className="max-w-5xl mx-auto mt-16 px-4 md:px-1">	
-						<div className="select-none text-sm mb-1 text-black/80 flex items-center gap-1">
+						<div className="select-none text-sm mb-1 text-black/80 dark:text-gray-100/80 flex items-center gap-1">
 							<svg width="9" height="14" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M4.5 5H8L3.5 11.5V7H0L4.5 0.5V5Z" fill="currentColor"/>
 							</svg>
 							<span className="uppercase leading-tight font-bold">Neuster Artikel</span>
 								<span className="text-sm leading-snug">
-									<span className="leading-relaxed">- {latestArticle.author.firstName} {latestArticle.author.lastName}</span> <span className="opacity-75">•</span> 11&#x200A;min
+									<span className="leading-relaxed">- {latestArticle.author.firstName} {latestArticle.author.lastName}</span> <span className="opacity-75">•</span> {latestArticle.readingTime ? Math.ceil(latestArticle.readingTime) : "?"}&#x200A;min
 								</span>
 						</div>
 						
@@ -63,7 +62,7 @@ export default function Blog() {
 }
 
 function Article({article}) {
-	const readingTime = useMemo(() => Math.ceil(Math.random()*18), [])
+	const readingTime = article.readingTime ? Math.ceil(article.readingTime) : null
 	const isTransitioning = unstable_useViewTransitionState(article.slug)
 
 	function getViewTransitionName(name: string) {
@@ -76,9 +75,9 @@ function Article({article}) {
 					<Image 
 						style={{ viewTransitionName: getViewTransitionName("image")}}
 						alt={article.title}
-						className="object-cover aspect-[27.5/17] w-full" 
+						className="object-cover aspect-[27.5/17] w-full"
 						src={article.image.url ?? fallBackImage} 
-						placeholder={article.image?.placeholder}
+						blurDataURL={article.image?.placeholder}
 						loading="lazy"
 						width={300} height={166} />
 						<div className="p-2 h-12 flex items-center -mt-12">
@@ -90,13 +89,14 @@ function Article({article}) {
 										src={article.author?.image?.url} alt="Avatar" aria-hidden width={22} height={22} />
 								</div>
 								<span className="text-white/90 text-sm font-light leading-snug mx-1.5 mr-1 tabular-nums">
-									<span className="leading-relaxed">{article.author.firstName} {article.author.lastName}</span> • {readingTime}&#x200A;min
+									<span className="leading-relaxed">{article.author.firstName} {article.author.lastName}</span> 
+									{readingTime ? <span> • {readingTime}&#x200A;min</span> : null}
 								</span>
 							</div>
 						</div>
 				</div>
-				<div className="">
-					<h3 className="font-bold md:text-balance hyphens text-black font-mono leading-super-tight tracking-tight text-[2.5rem] mt-4 md:py-1 mb-2.5 group-hover:underline" style={{ viewTransitionName: isTransitioning ? "title": undefined}}>{article.title}</h3>
+				<div className="text-black dark:text-white">
+					<h3 className="font-bold md:text-balance hyphens font-mono leading-super-tight tracking-tight text-[2.5rem] mt-4 md:py-1 mb-2.5 group-hover:underline" style={{ viewTransitionName: isTransitioning ? "title": undefined}}>{article.title}</h3>
 					<p className="text-gray-750 font-light mb-4">
 						{article.description}
 					</p>

@@ -56,7 +56,6 @@ blockquote > *:first-child {
 }
 
 body {
-	@apply bg-gray-50;
   font-feature-settings: 'liga' 1, 'calt' 1, 'cv10' 1, 'tnum' 1;
 }
 
@@ -153,4 +152,22 @@ figure.image-style-side {
     hyphens: auto;
     hyphenate-limit-chars: 8 8 2;
   }
+}
+
+img.remix-image {
+  transition: 0.2s filter ease-in, 0.23s transform ease-out;
+  filter: blur(0px);
+  transform: scale(1);
+}
+
+img.remix-image.blurred {
+  filter: blur(10px);
+  transform: scale(1.03);
+}
+
+::view-transition-group(*),
+::view-transition-group(*),
+::view-transition-new(*) {
+  transition: all 0s ease-in !important;
+  filter: none !important;
 }
