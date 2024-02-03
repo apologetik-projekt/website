@@ -41,7 +41,7 @@ export default function Article(){
 					className="object-cover bg-black origin-center w-full aspect-video" 
 					src={article?.image?.url}
 					blurDataURL={article?.image?.placeholder}
-					alt="Image" width={300} height={166} />
+					alt="Image" width={400} height={225} />
 			</div>
 			
 		 <section id="blog" className="prose prose-lg dark:prose-invert dark:text-gray-50/75 prose-headings:font-mono max-w-2xl mx-auto px-1 -mt-1 selection:bg-sky-300">

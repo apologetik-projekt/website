@@ -38,8 +38,8 @@ export function Image({ src, className, width, height, placeholder, style, ...pr
 				src={getAbsoluteImageUrl(src)}
 				responsive={[
 					{
-						size: { height, width: width ?? 1440 },
-						maxWidth: 2000
+						size: { height, width: width ?? 1000 },
+						maxWidth: 1440
 					},
 				]}
 				dprVariants={[1, 3]}
