@@ -4,9 +4,10 @@ import { Strapi } from "~/api/strapi"
 import Citation from "~/components/citation"
 import { BASE_URL } from "~/utils/constants"
 import { Image } from "~/components/image"
+import { MetaFunction } from "@remix-run/cloudflare"
 
 export const meta = ({data, location}) => [{
-	title: `${data.title} | Apologetik Projetkt`,
+	title: `${data.article.title} | Apologetik Projetkt`,
 	description: data.description,
 	site_name: 'Das Apologetik Projekt',
 	'og:url': BASE_URL + location.pathname,
