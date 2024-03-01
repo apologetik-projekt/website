@@ -22,6 +22,7 @@ import { trackPageview } from './api/plausible'
 import { useEffect } from "react"
 import { NavigationItem } from "./types/navigation"
 import { LinksFunction } from "@remix-run/react/dist/routeModules"
+import { isbot } from "isbot"
 
 
 export const meta: MetaFunction = () => [{ 
@@ -59,7 +60,9 @@ export default function App() {
   const headerTheme = currentHandle ? currentHandle["header"] : "light"  
 
   useEffect(() => {
-    trackPageview();
+    if (!isbot(navigator.userAgent)) {
+      trackPageview();
+    }
   }, [location]);
 
   return (
