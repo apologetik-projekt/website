@@ -42,7 +42,7 @@ export default function Blog() {
 						<Link prefetch="intent" to={latestArticle.slug} className="hover:underline" unstable_viewTransition>
 							<h2 style={{ viewTransitionName, animationDuration: isDesktop ? "0s !important" : "auto" }} className="font-extrabold text-5xl font-mono mb-4 relative z-30">{latestArticle.title}</h2>
 						</Link>
-						<p className="max-w-4xl text-pretty text-opacity-85 font-light">{latestArticle.description}</p>
+						<p className="max-w-4xl text-pretty text-opacity-85 font-normal">{latestArticle.description}</p>
 						
 					</div>
 				</div>
@@ -96,7 +96,7 @@ function Article({article}) {
 				</div>
 				<div className="text-black dark:text-white">
 					<h3 className="font-bold md:text-balance hyphens font-mono leading-super-tight tracking-tight text-[2.5rem] mt-4 md:py-1 mb-2.5 group-hover:underline" style={{ viewTransitionName: isTransitioning ? "title": undefined}}>{article.title}</h3>
-					<p className="text-gray-750 font-light mb-4">
+					<p className="text-gray-750 font-normal mb-4">
 						{article.description}
 					</p>
 				</div>
