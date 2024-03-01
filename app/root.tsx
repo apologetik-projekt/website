@@ -27,8 +27,10 @@ import { isbot } from "isbot"
 
 export const meta: MetaFunction = () => [{ 
   title: "Das Apologetik Projekt - Christliche Apologetik",
-  description: "Christentum - nicht nur schön, sondern auch wahr. Christen zurüsten. Zweiflern begegnen. Skeptikern antworten.",
-}]
+}, {
+  name: "description",
+  content: "Christentum - nicht nur schön, sondern auch wahr. Christen zurüsten. Zweiflern begegnen. Skeptikern antworten.",
+},]
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },

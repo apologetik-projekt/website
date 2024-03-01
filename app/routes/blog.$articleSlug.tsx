@@ -8,13 +8,15 @@ import { MetaFunction } from "@remix-run/cloudflare"
 
 export const meta = ({data: { article }, location}) => [{
 	title: `${article.title} | Apologetik Projetkt`,
-	description: article.description,
 	site_name: 'Das Apologetik Projekt',
 	'og:url': BASE_URL + location.pathname,
 	'og:title': `${article.seo_title ?? article.title} | Apologetik Projekt`,
 	'og:description': article.description,
 	'og:image': article.image?.url,
 	'twitter:card': 'summary'
+}, {
+		name: "description",
+		content: article.description,
 }]
 
 export const links = () => [
