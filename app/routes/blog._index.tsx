@@ -1,8 +1,7 @@
-import { json, LoaderFunction, MetaFunction } from "@remix-run/cloudflare"
-import { Link, NavLink, unstable_useViewTransitionState, useLoaderData } from '@remix-run/react'
+import { json, MetaFunction } from "@remix-run/cloudflare"
+import { Link, unstable_useViewTransitionState, useLoaderData } from '@remix-run/react'
 import { Strapi } from "~/api/strapi"
 import { Image } from "~/components/image"
-import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react"
 import { useMediaQuery } from "~/utils/use-media-query"
 import { Masonry } from "~/components/masonry"
 
@@ -40,7 +39,7 @@ export default function Blog() {
 								</span>
 						</div>
 						
-						<Link to={latestArticle.slug} className="hover:underline" unstable_viewTransition>
+						<Link prefetch="intent" to={latestArticle.slug} className="hover:underline" unstable_viewTransition>
 							<h2 style={{ viewTransitionName, animationDuration: isDesktop ? "0s !important" : "auto" }} className="font-extrabold text-5xl font-mono mb-4 relative z-30">{latestArticle.title}</h2>
 						</Link>
 						<p className="max-w-4xl text-pretty text-opacity-85 font-light">{latestArticle.description}</p>
@@ -70,7 +69,7 @@ function Article({article}) {
 	}
 
 	return (
-		<Link key={article.slug} to={article.slug} className="group hover:opacity-90 duration-200 flex flex-col" unstable_viewTransition>
+		<Link prefetch="intent" key={article.slug} to={article.slug} className="group hover:opacity-90 duration-200 flex flex-col" unstable_viewTransition>
 				<div className="">
 					<Image
 						style={{ viewTransitionName: getViewTransitionName("image")}}
