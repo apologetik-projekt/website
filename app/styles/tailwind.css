@@ -97,7 +97,8 @@ mark {
   margin-inline: -4px;
   z-index: -1;
   position: relative;
-  padding-block: 0.18em;
+  padding-top: 0.18em;
+  padding-bottom: 0.16em;
 }
 
 .no-tap {
