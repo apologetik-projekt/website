@@ -92,6 +92,14 @@ li::marker {
   line-height: 0;
 }
 
+mark {
+  padding-inline: 4px;
+  margin-inline: -4px;
+  z-index: -1;
+  position: relative;
+  padding-block: 0.18em;
+}
+
 .no-tap {
   -webkit-tap-highlight-color: transparent;
 }
@@ -155,14 +163,14 @@ figure.image-style-side {
 }
 
 img.remix-image {
-  transition: 0.2s filter ease-in, 0.23s transform ease-out;
+  transition: 0.1s filter ease-in;
   filter: blur(0px);
   transform: scale(1);
 }
 
 img.remix-image.blurred {
   filter: blur(10px);
-  transform: scale(1.03);
+  //transform: scale(1.005);
 }
 
 ::view-transition-group(*),
