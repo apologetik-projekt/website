@@ -30,7 +30,6 @@ export function Image({ src, className, width, height, placeholder, style, optio
 	return (
 		<div className={clsx("overflow-hidden", ...shapeClasses)} style={{ viewTransitionName: style?.viewTransitionName }}>
 			<RemixImage
-				onLoad={() => console.log(ref?.current?.complete)}
 				onLoadingComplete={() => setBlurred(false)}
 				ref={ref}
 				id="image"
