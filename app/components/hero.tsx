@@ -37,7 +37,8 @@ export default ({heading, image}: Props) => (
 				<div className="max-w-5xl pt-5 pb-0 md:pt-10 md:pb-12 mx-auto -mt-2 md:mt-2 px-4 sm:px-5 md:px-7 lg:px-0">
 				<section className="flex flex-col md:flex-row-reverse justify-between space-x-2 md:pb-4">
 					<motion.div variants={variants} initial="before" animate="after" className="my-2 md:mt-0 md:w-3/5 md:-ml-12">
-						<Image 
+						<Image
+							loaderUrl="https://images.apologetik-projekt.de/"
 							alt="Zwei Personen unterhalten sich" 
 							width={675} height={450}
 							className="m-0 bg-amber-500 saturate-[115%]" 
