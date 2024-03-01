@@ -5,7 +5,7 @@ interface Props {
 
 export default function Citation({quote, cite}: Props) {
 	return (
-	 <div className="my-6 -mx-5 grayscale-10">
+	 <div className="citation my-6 -mx-5 grayscale-10">
 		 <svg viewBox="0 0 400 16.5" xmlns="http://www.w3.org/2000/svg">
 			 <path 
 			 	className="text-yellow-300/40 dark:text-yellow-200/55" fill="currentColor" 
