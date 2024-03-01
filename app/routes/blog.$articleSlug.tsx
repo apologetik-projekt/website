@@ -69,7 +69,7 @@ function Author({author, date}) {
 			<Image style={{ viewTransitionName: "author-image"}} alt="avatar" className="object-cover object-center border-2 border-transparent rounded-full aspect-square h-10" height={40} width={40} src={profileImage} placeholder="empty" />
 			<p className="leading-none mt-1 ml-2">
 				<span className="uppercase font-semibold text-gray-700 dark:text-gray-300 opacity-95 relative z-20">{author.firstName} {author.lastName}</span> <br />
-				<span className="text-sm font-medium text-gray-700 dark:text-gray-300 opacity-75 block">veröffentlicht am {new Date(date).toLocaleDateString()}</span>
+				<span className="text-sm font-medium text-gray-700 dark:text-gray-300 opacity-75 block">veröffentlicht am {new Date(date).toLocaleDateString("de-DE")}</span>
 			</p>
 		</div>
 	)
