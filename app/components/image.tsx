@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { CSSProperties, useEffect, useRef, useState } from "react"
-import { ImageProps, Image as RemixImage } from "remix-image"
+import { ImageProps, MimeType, Image as RemixImage } from "remix-image"
 
 type Props = ImageProps & {
 	src: string,
@@ -20,7 +20,7 @@ export function getOptimizedImageUrl(image: string, params: string = "") {
 }
 
 
-export function Image({ src, className, width, height, placeholder, style, ...props }: Props) {
+export function Image({ src, className, width, height, placeholder, style, options, ...props }: Props) {
 	const shapeClasses = className?.split(" ").filter(c => c.includes("rounded") || c.includes("aspect")) ?? []
 	const ref = useRef<HTMLImageElement>(null)
 	const isInitiallyBlurred = !ref?.current?.complete == true && placeholder !== "empty"
@@ -34,7 +34,7 @@ export function Image({ src, className, width, height, placeholder, style, ...pr
 				onLoadingComplete={() => setBlurred(false)}
 				ref={ref}
 				id="image"
-				loaderUrl="/api/image"
+				loaderUrl="https://assets.apologetik-projekt.de/image"
 				src={getAbsoluteImageUrl(src)}
 				responsive={[
 					{
@@ -42,6 +42,10 @@ export function Image({ src, className, width, height, placeholder, style, ...pr
 						maxWidth: 1440
 					},
 				]}
+				options={{
+					contentType: MimeType.WEBP,
+					...options
+				}}
 				dprVariants={[1, 3]}
 				className={classes}
 				placeholder={placeholder ?? props.blurDataURL ? "blur" : undefined}

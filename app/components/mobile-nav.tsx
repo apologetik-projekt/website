@@ -25,7 +25,7 @@ export default function MobileNavigation({ navigation }: Props) {
 			transition: {
 				on: { CLOSE: 'closed' },
 				effect({ send }) {
-					setTimeout(() => send('CLOSE'), 930)
+					setTimeout(() => send('CLOSE'), 830)
 				},
 			},
 			closed: {
@@ -54,7 +54,7 @@ export default function MobileNavigation({ navigation }: Props) {
 			borderRadius: '100%',
 			transition: {
 				duration: 0.2,
-				borderRadius: { delay: 0.1, duration: 0.08 }
+				borderRadius: { duration: 0.08 }
 			}
 		}
 	}
@@ -79,7 +79,7 @@ export default function MobileNavigation({ navigation }: Props) {
 			}
 		},
 		exit: (delayedTransition) => ({
-			opacity: 0, x: 40, y: 10, transition: { delay: delayedTransition ? 0.64 : 0, duration: delayedTransition ? 0.3 : 0.1 }
+			opacity: 0, x: 40, y: 10, transition: { delay: delayedTransition ? 0.54 : 0, duration: delayedTransition ? 0.3 : 0.1 }
 		})
 	}
 

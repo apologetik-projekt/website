@@ -29,10 +29,10 @@ function Quotes({quotes}){
 						initial={{ opacity: 1, x: index*(24-(index)*2) , y:index*-(10-(index)/1.2) }}
 						animate={{opacity: 1, x: index*(24-(index)*2), y: index*-(10-(index)/1.2), transition: { ease: 'easeOut'}}}
 						exit={{opacity: 0, x: 12, y: -4, transition: {duration: 0.1} }}
-						style={{ filter: "drop-shadow(0 1px 5px rgba(0, 0, 0, 0.06))", backdropFilter: "blur(2.5px) contrast(1.05)", zIndex: items.length - index, opacity: (index == 0) ? 1 : 0.5}} 
-						className="bg-white bg-opacity-90 text-lg p-4 px-3 md:px-4 w-64 h-full">
+						style={{ filter: "drop-shadow(0 1px 5px rgba(0, 0, 0, 0.06))", zIndex: items.length - index}} 
+						className="bg-white text-lg p-4 px-3 md:px-4 w-64 h-full">
 							<svg width="45" height="36" className="fill-current md:-ml-1 text-[#FFEF31]"><path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path></svg>
-							<div className="mt-2 px-0.5" style={{opacity: (index == 0) ? 1 : 0.2}}>
+							<div className="mt-2 px-0.5">
 								<p className="font-medium text-base leading-snug text-black">{quote}</p>
 							</div>
 					</motion.div>

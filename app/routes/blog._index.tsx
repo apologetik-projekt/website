@@ -73,7 +73,6 @@ function Article({article}) {
 		<Link key={article.slug} to={article.slug} className="group hover:opacity-90 duration-200 flex flex-col" unstable_viewTransition>
 				<div className="">
 					<Image
-						loaderUrl="https://images.apologetik-projekt.de"
 						style={{ viewTransitionName: getViewTransitionName("image")}}
 						alt={article.title}
 						className="object-cover aspect-[27.5/17] w-full"
@@ -84,8 +83,7 @@ function Article({article}) {
 						<div className="p-2 h-12 flex items-center -mt-12">
 							<div className="flex items-center px-2 py-1 rounded-full backdrop-blur-md bg-black/40" style={{ viewTransitionName: getViewTransitionName("author"), width: "max-content"}}>
 								<div className="-translate-x-[3px]">
-									<Image 
-										loaderUrl="https://images.apologetik-projekt.de"
+									<Image
 										style={{ viewTransitionName: getViewTransitionName("author-image") }}
 										className="rounded-full overflow-hidden bg-blue-400 aspect-square h-6 w-6"
 										src={article.author?.image?.url} alt="Avatar" aria-hidden width={22} height={22} />

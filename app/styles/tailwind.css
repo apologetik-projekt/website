@@ -171,7 +171,7 @@ img.remix-image {
 
 img.remix-image.blurred {
   filter: blur(10px);
-  //transform: scale(1.005);
+  transform: scale(1.005);
 }
 
 ::view-transition-group(*),
