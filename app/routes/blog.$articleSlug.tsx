@@ -37,7 +37,8 @@ export default function Article(){
 			</header>
 
 			<div className="my-3 -mx-4 md:m-4 md:mb-10" style={{ viewTransitionName: "image"}}>
-				<Image 
+				<Image
+					loaderUrl="https://images.apologetik-projekt.de"
 					className="object-cover bg-black origin-center w-full aspect-video" 
 					src={article?.image?.url}
 					blurDataURL={article?.image?.placeholder}
@@ -63,7 +64,7 @@ function Author({author, date}) {
 	const profileImage = author?.image?.url ?? `https://ui-avatars.com/api/?name=${author?.firstName}+${author?.lastName}&background=7cd3fc&color=22222c`
 	return (
 		<div className="flex items-center py-4 mt-2 -ml-0.5 relative z-10" style={{ viewTransitionName: "author"}}>
-			<Image style={{ viewTransitionName: "author-image"}} alt="avatar" className="object-cover object-center border-2 border-transparent rounded-full aspect-square h-10" height={40} width={40} src={profileImage} placeholder="empty" />
+			<Image loaderUrl="https://images.apologetik-projekt.de" style={{ viewTransitionName: "author-image"}} alt="avatar" className="object-cover object-center border-2 border-transparent rounded-full aspect-square h-10" height={40} width={40} src={profileImage} placeholder="empty" />
 			<p className="leading-none mt-1 ml-2">
 				<span className="uppercase font-semibold text-gray-700 dark:text-gray-300 opacity-95 relative z-20">{author.firstName} {author.lastName}</span> <br />
 				<span className="text-sm font-medium text-gray-700 dark:text-gray-300 opacity-75 block">veröffentlicht am {new Date(date).toLocaleDateString()}</span>
