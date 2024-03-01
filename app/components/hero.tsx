@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Image } from './image'
+import { isbot } from 'isbot'
 
 const variants = {
 	before: {
@@ -32,7 +33,7 @@ interface Props {
 }
 
 export default ({heading, image}: Props) => (
-	<header style={{background: 'url(/bg_paper_dark.webp), #161515'}} className="min-h-[90vh] font-mono md:min-h-[50vh] max-h-[100vh] w-full text-white overflow-hidden relative -mt-32 grid stack items-end">
+	<header style={{background: isbot(navigator.userAgent) ? '#161515' : 'url(/bg_paper_dark.webp), #161515'}} className="min-h-[90vh] font-mono md:min-h-[50vh] max-h-[100vh] w-full text-white overflow-hidden relative -mt-32 grid stack items-end">
 			<div className="radial-gradient bg-center-topish  min-h-[50vh] md:min-h-[50vh] max-h-[100vh] w-full h-full pt-32 pb-24 isolate items-stretch transition-colors">
 				<div className="max-w-5xl pt-5 pb-0 md:pt-10 md:pb-12 mx-auto -mt-2 md:mt-2 px-4 sm:px-5 md:px-7 lg:px-0">
 				<section className="flex flex-col md:flex-row-reverse justify-between space-x-2 md:pb-4">
