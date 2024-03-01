@@ -40,7 +40,7 @@ export default ({heading, image}: Props) => (
 						<Image
 							loaderUrl="https://images.apologetik-projekt.de/"
 							alt="Zwei Personen unterhalten sich" 
-							width={675} height={450}
+							width={300} height={220}
 							className="m-0 bg-amber-500 saturate-[115%] w-full" 
 							loading="eager"
 							blurDataURL={image?.placeholder}
