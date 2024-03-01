@@ -47,7 +47,7 @@ export default function Article(){
 					alt="Image" width={400} height={225} />
 			</div>
 			
-		 <section id="blog" className="prose prose-lg dark:prose-invert dark:text-gray-50/75 prose-headings:font-mono prose-ul:pl-4 md:prose-ul:pl-7 max-w-2xl mx-auto px-1 -mt-1 selection:bg-sky-300">
+		 <section id="blog" className="prose prose-lg dark:prose-invert dark:text-gray-50/75 prose-headings:font-mono prose-ul:pl-4 max-w-2xl mx-auto px-1 -mt-1 selection:bg-sky-300">
 				{article?.content.map((block, index)=>{
 					if (block.__component === 'page.editor') {
 							return <div key={index} className="break-words" dangerouslySetInnerHTML={{__html: block.editor}}></div>
