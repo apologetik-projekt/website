@@ -71,7 +71,7 @@ function Socials(){
 	return (
 		<div className="w-full md:w-82 px-5 py-7 md:py-6">
 			<h2 className="text-3xl font-mono font-bold mb-3 leading-7">Werde Teil der Community</h2>
-			<p className="leading-snug">Folge unserem Channel auf Instagram, Youtube oder TikTok.</p>
+			<p className="leading-snug">Folge unserem Projekt auf Instagram, Youtube oder TikTok.</p>
 			<div className="mt-4 flex flex-col space-y-1 font-normal">
 				{items.map((item)=>(
 					<a key={item.title} href={item.link} target="_blank" className="font-medium text-lg text-gray-800 hover:text-black">

@@ -6,14 +6,14 @@ import { BASE_URL } from "~/utils/constants"
 import { Image } from "~/components/image"
 import { MetaFunction } from "@remix-run/cloudflare"
 
-export const meta = ({data, location}) => [{
-	title: `${data.article.title} | Apologetik Projetkt`,
-	description: data.description,
+export const meta = ({data: { article }, location}) => [{
+	title: `${article.title} | Apologetik Projetkt`,
+	description: article.description,
 	site_name: 'Das Apologetik Projekt',
 	'og:url': BASE_URL + location.pathname,
-	'og:title': `${data.seo_title ?? data.title} | Apologetik Channel`,
-	'og:description': data.description,
-	'og:image': data.image?.url,
+	'og:title': `${article.seo_title ?? article.title} | Apologetik Projekt`,
+	'og:description': article.description,
+	'og:image': article.image?.url,
 	'twitter:card': 'summary'
 }]
 
