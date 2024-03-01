@@ -4,7 +4,7 @@ import { useState } from "react"
 //TODO: Cleanup
 export default function Testimonials({quotes}){
 	return (
-		<div className="flex flex-col justify-center items-center space-y-10 md:space-y-0 md:space-x-6 bg-[#FFEF31] md:flex-row px-5 py-12 md:p-8 mt-12 -mx-4 md:-mx-8">
+		<div className="flex flex-col justify-center items-center space-y-10 md:space-y-0 md:space-x-6 bg-[#FFEF31] md:flex-row px-5 pt-12 md:p-8 mt-12 -mx-5 md:-mx-9">
 			<Quotes quotes={quotes} />
 			<Socials />
 		</div>
@@ -12,15 +12,16 @@ export default function Testimonials({quotes}){
 }
 
 function Quotes({quotes}){
-	const [items, setItems] = useState(quotes.reverse())
+	const reversedQuotes = structuredClone(quotes).reverse()
+	const [items, setItems] = useState(reversedQuotes)
 
 	function handleClick(){
-		setItems(items.slice(1).concat(items[0]))
+		setItems(items => items.slice(1).concat(items[0]))
 	} 
 	return (
 		<section className="relative">
 			<div className="grid stack w-80" style={{paddingTop: items.length*7-9}}>
-				<AnimatePresence>
+				<AnimatePresence mode="popLayout">
 				{items.slice(0,5).map((quote, index)=>(
 					<motion.div 
 						key={quote.substring(10)} 
@@ -38,8 +39,8 @@ function Quotes({quotes}){
 				))}
 				</AnimatePresence>
 			</div>
-			<button className="float-right no-tap mr-4 block bottom-0 right-0 absolute z-30 bg-yellow-600 bg-opacity-50 hover:bg-opacity-40 rounded-full h-10 w-10 active:bg-opacity-60" onClick={handleClick} style={{marginTop: items.length*5 + 4}}>
-				<svg className="text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+			<button aria-label="Next" className="float-right no-tap mr-4 block bottom-0 right-0 absolute z-30 bg-yellow-600 bg-opacity-50 hover:bg-opacity-40 rounded-full h-10 w-10 active:bg-opacity-60" onClick={handleClick} style={{marginTop: items.length*5 + 4}}>
+				<svg aria-hidden className="text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
 			</button>
 		</section>
 	)
@@ -70,10 +71,10 @@ function Socials(){
 	return (
 		<div className="w-full md:w-82 px-5 py-7 md:py-6">
 			<h2 className="text-3xl font-mono font-bold mb-3 leading-7">Werde Teil der Community</h2>
-			<p className="leading-snug">Folge unserem Channel auf Instagram, Youtube oder TikTok.</p>
+			<p className="leading-snug">Folge unserem Projekt auf Instagram, Youtube oder TikTok.</p>
 			<div className="mt-4 flex flex-col space-y-1 font-normal">
 				{items.map((item)=>(
-					<a href={item.link} target="_blank" className="font-medium text-lg text-gray-800 hover:text-black">
+					<a key={item.title} href={item.link} target="_blank" className="font-medium text-lg text-gray-800 hover:text-black">
 						<span className="w-24 flex items-center">
 							<svg className="mr-2 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width={item.size} height={item.size} viewBox="0 0 24 24" fill="currentColor">{item.svg}</svg>
 							{item.title}

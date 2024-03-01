@@ -1,4 +1,4 @@
-import { json, LoaderFunction } from "@remix-run/cloudflare"
+import { json } from "@remix-run/react"
 import { useLoaderData } from "@remix-run/react"
 import { Strapi } from "~/api/strapi"
 import Hero from "~/components/hero"
@@ -16,7 +16,7 @@ export const handle = {
 }
 
 
-export const loader: LoaderFunction = async ({ context }) => {
+export const loader = async ({ context }) => {
   const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
   const { data } = await strapi.fetch('slugify/slugs/page/home?populate[0]=pageHeader.image&populate[1]=content')
   data.content.push({
@@ -28,11 +28,11 @@ export const loader: LoaderFunction = async ({ context }) => {
 }
 
 export default function Index() {
-  const page = useLoaderData()
+  const page = useLoaderData<typeof loader>()
   return (
     <>
       <Hero heading={page.pageHeader?.pageTitle} image={page.pageHeader?.image} />
-      <main className="max-w-2xl mx-auto mt-24 px-5 pb-20 text-gray-900 break-words">
+      <main className="max-w-2xl mx-auto mt-24 -mb-10 sm:mb-10 px-5 text-gray-900 break-words">
         {page.content?.map((block) => {
 
           // *** EDITOR ***

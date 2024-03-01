@@ -1,16 +1,10 @@
-import { json, LoaderFunction, redirect } from '@remix-run/cloudflare'
+import { json } from '@remix-run/react'
 import { useLoaderData } from '@remix-run/react'
-import type { PageData } from '~/types/kirby'
 import ContactForm from '~/components/contact-form'
-//import Member from '~/components/member'
 import { Strapi } from '~/api/strapi'
-import { getImageUrl } from '~/components/image'
+import { getOptimizedImageUrl } from '~/components/image'
 
-interface LoaderData extends PageData {
-  env: any
-}
-
-export const loader: LoaderFunction = async ({ context, params }) => {
+export const loader = async ({ context, params }) => {
   const slugArray = params["*"]?.split("/")
   const slug = slugArray?.[slugArray.length - 1]
 
@@ -19,13 +13,13 @@ export const loader: LoaderFunction = async ({ context, params }) => {
 
   const env = {
     RECAPTCHA_PUBLIC_KEY: context.env.RECAPTCHA_PUBLIC_KEY
-  }
+  } as const
 
   return json({ ...page.data, env })
 }
 
 export default function Slug() {
-  const { pageHeader, content, env } = useLoaderData()
+  const { pageHeader, content, env } = useLoaderData<typeof loader>()
 
   return (
     <main className="max-w-4xl mx-auto px-5 pt-5 pb-10">
@@ -36,7 +30,7 @@ export default function Slug() {
 
       {pageHeader?.showImage && (
         <div className='max-h-screen lg:-mx-[4.525rem] block mb-8 bg-black'>
-          <div className='aspect-16/9 w-full h-[45vh] bg-cover flex justify-center items-center' style={{ backgroundImage: `url(${getImageUrl(pageHeader.image?.url || '', '')})` }}>
+          <div className='aspect-16/9 w-full h-[45vh] bg-cover flex justify-center items-center' style={{ backgroundImage: `url(${getOptimizedImageUrl(pageHeader.image?.url || '')})` }}>
             <h1 className='text-white font-mono text-center text-7xl font-extrabold uppercase drop-shadow'>{pageHeader.pageTitle}</h1>
           </div>
         </div>

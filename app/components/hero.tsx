@@ -32,17 +32,18 @@ interface Props {
 }
 
 export default ({heading, image}: Props) => (
-	<header style={{backgroundColor: '#333333'}} className="min-h-[90vh] font-mono md:min-h-[50vh] max-h-[100vh] w-full text-white overflow-hidden relative -mt-32 grid stack items-end [background:url(/bg_paper_dark.jpg)]">
+	<header style={{background: 'url(/bg_paper_dark.webp), #161515'}} className="min-h-[90vh] font-mono md:min-h-[50vh] max-h-[100vh] w-full text-white overflow-hidden relative -mt-32 grid stack items-end">
 			<div className="radial-gradient bg-center-topish  min-h-[50vh] md:min-h-[50vh] max-h-[100vh] w-full h-full pt-32 pb-24 isolate items-stretch transition-colors">
 				<div className="max-w-5xl pt-5 pb-0 md:pt-10 md:pb-12 mx-auto -mt-2 md:mt-2 px-4 sm:px-5 md:px-7 lg:px-0">
 				<section className="flex flex-col md:flex-row-reverse justify-between space-x-2 md:pb-4">
 					<motion.div variants={variants} initial="before" animate="after" className="my-2 md:mt-0 md:w-3/5 md:-ml-12">
-						<Image 
+						<Image
+							loaderUrl="https://images.apologetik-projekt.de/"
 							alt="Zwei Personen unterhalten sich" 
 							width={675} height={450}
 							className="m-0 bg-amber-500 saturate-[115%]" 
 							loading="eager"
-							placeholder={image?.placeholder}
+							blurDataURL={image?.placeholder}
 							src={image?.url}/>
 					</motion.div>
 					<motion.div variants={textVariant} id="heading" initial="hidden" animate="show" className="-mt-6 sm:mt-10 md:w-3/5 md:min-w-[350px]">

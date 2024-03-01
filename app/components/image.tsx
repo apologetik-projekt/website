@@ -1,55 +1,54 @@
-import React, { HTMLAttributes, useRef, useState } from "react"
-import { BASE_URL } from "../utils/constants"
+import clsx from "clsx"
+import { CSSProperties, useEffect, useRef, useState } from "react"
+import { ImageProps, Image as RemixImage } from "remix-image"
 
-export function getImageUrl(image: string, params: string) {
-		if (!image.startsWith("https")) return image
-		else return `https://images.weserv.nl/?url=${image}${params}&output=webp`
-}
-
-interface Props {
-	className?: string,
+type Props = ImageProps & {
 	src: string,
-	alt: string,
 	width?: number,
 	height?: number,
-	loading?: 'lazy' | 'eager',
-	placeholder?: string
 }
 
-export function Image({ src, alt, className, loading, width, height, placeholder, ...props }: Props) {
-	const styles: React.CSSProperties | undefined = placeholder ? {
-		backgroundImage: `url(${placeholder})`,
-		backgroundSize: 'contain',
-		//filter: 'blur(10px)',
-		overflow: 'hidden',
-		transition: 'filter',
-		transitionDuration: '0.2s',
-	} : undefined
-	
-	const imageRef = useRef<HTMLImageElement>(null)
-	function imageLoaded() {
-		if (imageRef.current != null) {
-			imageRef.current.style.filter = 'blur(0px)'
-			imageRef.current.style.backgroundImage = ''
-		}
-	}
+export function getAbsoluteImageUrl(image: string) {
+	if (!image.startsWith("https")) return "http://127.0.0.1:1337"+image
+	else if (image.includes(".webp")) return `https://images.weserv.nl/?url=${image}&output=jpg`
+	else return image
+}
 
-	const imageParams = width && height ? `&w=${width*2}&h=${height*2}&a=center` : ''
+export function getOptimizedImageUrl(image: string, params: string = "") {
+	if (!image.startsWith("https")) return "http://127.0.0.1:1337"+image
+	else return `https://images.weserv.nl/?url=${image}${params}&output=webp`
+}
+
+
+export function Image({ src, className, width, height, placeholder, style, ...props }: Props) {
+	const shapeClasses = className?.split(" ").filter(c => c.includes("rounded") || c.includes("aspect")) ?? []
+	const ref = useRef<HTMLImageElement>(null)
+	const isInitiallyBlurred = !ref?.current?.complete == true && placeholder !== "empty"
+	const [blurred, setBlurred] = useState(isInitiallyBlurred)
+	const classes = clsx(className, blurred ? "blurred" : isInitiallyBlurred ? "unblurred" : undefined)
 
 	return (
-		<div className="overflow-hidden">
-		<img
-			onLoad={imageLoaded}
-			src={getImageUrl(src ?? '', imageParams)}
-			style={placeholder ? styles : undefined}
-			alt={alt}
-			ref={imageRef}
-			height={height}
-			width={width}
-			className={className}
-			loading={loading}
-			{...props}
-		/>
+		<div className={clsx("overflow-hidden", ...shapeClasses)} style={{ viewTransitionName: style?.viewTransitionName }}>
+			<RemixImage
+				onLoad={() => console.log(ref?.current?.complete)}
+				onLoadingComplete={() => setBlurred(false)}
+				ref={ref}
+				id="image"
+				loaderUrl="/api/image"
+				src={getAbsoluteImageUrl(src)}
+				responsive={[
+					{
+						size: { height, width: width ?? 1000 },
+						maxWidth: 1440
+					},
+				]}
+				dprVariants={[1, 3]}
+				className={classes}
+				placeholder={placeholder ?? props.blurDataURL ? "blur" : undefined}
+				style={{ ...style, viewTransitionName: undefined }}
+				{...props}
+				unoptimized={props.unoptimized as false | undefined} // weird type error
+			/>
 		</div>
 	)
 }
