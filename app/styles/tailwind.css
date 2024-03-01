@@ -93,12 +93,24 @@ li::marker {
 }
 
 mark {
-  padding-inline: 4px;
-  margin-inline: -4px;
+  padding-inline: 3px;
+  margin-inline: -3px;
   z-index: -1;
   position: relative;
   padding-top: 0.18em;
   padding-bottom: 0.16em;
+  border-radius: 1.5px;
+}
+
+.marker-yellow {
+  background-color: #fff18f;
+}
+
+@media (prefers-color-scheme: dark) {
+  .marker-yellow {
+    background-color: #817c1891;
+    color: rgba(250, 250, 250, 0.75);
+  }
 }
 
 .no-tap {
