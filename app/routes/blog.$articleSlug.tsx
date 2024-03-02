@@ -1,10 +1,12 @@
-import { json } from "@remix-run/react"
+import { json, useParams } from "@remix-run/react"
 import { useLoaderData } from "@remix-run/react"
 import { Strapi } from "~/api/strapi"
 import Citation from "~/components/citation"
 import { BASE_URL } from "~/utils/constants"
 import { Image } from "~/components/image"
 import { MetaFunction } from "@remix-run/cloudflare"
+import { useEffect, useRef, useState } from "react"
+import { AudioPlayer } from "~/components/audio-player"
 
 export const meta = ({data: { article }, location}) => [{
 	title: `${article.title} | Apologetik Projetkt`,
@@ -31,6 +33,7 @@ export const loader = async ({ params, context }) => {
 
 export default function Article(){
 	const { article, readingTime } = useLoaderData<any>()
+	const { articleSlug } = useParams()
 
 	return (	
 		<article className="max-w-4xl mx-auto p-4 pb-10 w-full">
@@ -39,15 +42,19 @@ export default function Article(){
 				<Author author={article?.author} date={article?.date} />	
 			</header>
 
-			<div className="my-3 -mx-4 md:m-4 md:mb-10" style={{ viewTransitionName: "image"}}>
+			<div className="my-3 -mx-4 md:m-4 md:mb-6" style={{ viewTransitionName: "image"}}>
 				<Image
 					className="object-cover bg-black origin-center w-full aspect-video" 
 					src={article?.image?.url}
 					blurDataURL={article?.image?.placeholder}
 					alt="Image" width={400} height={225} />
 			</div>
+
+			<div className="-mx-[5px] md:mx-4 md:mb-8">
+				<AudioPlayer slug={articleSlug} />
+			</div>
 			
-		 <section id="blog" className="prose prose-lg dark:prose-invert dark:text-gray-50/75 prose-headings:font-mono prose-ul:pl-4 max-w-2xl mx-auto px-1 -mt-1 selection:bg-sky-300">
+		 <section id="blog" className="prose prose-lg dark:prose-invert dark:text-gray-50/75 prose-headings:font-mono prose-ul:pl-4 max-w-2xl mx-auto px-1 -mt-2 selection:bg-sky-300">
 				{article?.content.map((block, index)=>{
 					if (block.__component === 'page.editor') {
 							return <div key={index} className="break-words" dangerouslySetInnerHTML={{__html: block.editor}}></div>
