@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from "react"
 
 const speeds = [0.8, 1.0, 1.1, 1.25, 1.5, 2]
 function secondsToMMSS(duration: number) {
+	if (Number.isNaN(duration)) {
+		duration = 0
+	}
+	duration = Math.floor(duration)
 	const date = new Date(0)
 	const minutes = Math.floor(duration / 60)
 	date.setMinutes(minutes)
-	const seconds = Math.floor(duration - (minutes * 60))
-	date.setSeconds(Math.floor(seconds))
+	const seconds = duration - minutes * 60
+	date.setSeconds(seconds)
 	return date.toISOString().substring(14,19)
 }
 export function AudioPlayer({ slug }: { slug: string }) {
