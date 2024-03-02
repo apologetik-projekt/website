@@ -98,8 +98,8 @@ export function AudioPlayer({ slug }: { slug: string }) {
       </div>
       <audio
 				ref={audioRef}
-				preload="metadata" 
-				src={`http://localhost:4000/audio/${slug}.mp3`}
+				preload="metadata"
+				src={`https://assets.apologetik-projekt.de/audio/${slug}.mp3`}
 				onTimeUpdate={() => { setCurrentTime(audioRef.current?.currentTime ?? 0) } } 
 			/>
     </div>
