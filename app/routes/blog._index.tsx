@@ -96,7 +96,7 @@ function Article({article}) {
 				</div>
 				<div className="text-black dark:text-white">
 					<h3 className="font-bold md:text-balance hyphens font-mono leading-super-tight tracking-tight text-[2.5rem] mt-4 md:py-1 mb-2.5 group-hover:underline" style={{ viewTransitionName: isTransitioning ? "title": undefined}}>{article.title}</h3>
-					<p className="text-gray-600 font-normal mb-4">
+					<p className="text-gray-600 dark:text-gray-400 font-normal mb-4">
 						{article.description}
 					</p>
 				</div>
