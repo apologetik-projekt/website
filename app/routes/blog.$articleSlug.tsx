@@ -31,9 +31,10 @@ export const loader = async ({ params, context }) => {
   return json({ article })
 }
 
+const safeDate = new Date("2024-03-01")
 export default function Article(){
 	const { article, readingTime } = useLoaderData<any>()
-	const { articleSlug } = useParams()
+	const { articleSlug } = useParams() as { articleSlug: string }
 
 	return (	
 		<article className="max-w-4xl mx-auto p-4 pb-10 w-full">
@@ -50,9 +51,11 @@ export default function Article(){
 					alt="Image" width={400} height={225} />
 			</div>
 
-			<div className="-mx-[5px] md:mx-4 md:mb-8">
-				<AudioPlayer slug={articleSlug} />
-			</div>
+			{ new Date(article.date) <= safeDate && 
+				<div className="-mx-[5px] md:mx-4 md:mb-8">
+					<AudioPlayer slug={articleSlug} />
+				</div>
+			}
 			
 		 <section id="blog" className="prose prose-lg dark:prose-invert dark:text-gray-50/75 prose-headings:font-mono prose-ul:pl-4 max-w-2xl mx-auto px-1 -mt-2 selection:bg-sky-300">
 				{article?.content.map((block, index)=>{
