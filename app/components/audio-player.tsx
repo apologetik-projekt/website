@@ -11,6 +11,7 @@ function secondsToMMSS(duration: number) {
 	date.setMinutes(minutes)
 	const seconds = duration - minutes * 60
 	date.setSeconds(seconds)
+	console.log(date)
 	return date.toISOString().substring(14,19)
 }
 export function AudioPlayer({ slug }: { slug: string }) {
@@ -29,7 +30,7 @@ export function AudioPlayer({ slug }: { slug: string }) {
 	function play(e) {
 		e.target.focus()
 		audioRef.current?.play()
-		setDuration(audioRef.current?.duration)
+		setDuration(audioRef.current?.duration ?? 0)
 		setPlaying(true)
 	}
 
@@ -65,7 +66,7 @@ export function AudioPlayer({ slug }: { slug: string }) {
 
 	function setProgress(e) {
 		if (audioRef.current) {
-			const currentDuration = audioRef.current.duration
+			const currentDuration = audioRef.current.duration ?? 0
 			audioRef.current.currentTime = Math.floor(currentDuration) * (e.nativeEvent.offsetX / e.target.offsetWidth);
 		}
 	}
