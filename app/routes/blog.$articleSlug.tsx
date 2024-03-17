@@ -33,7 +33,7 @@ export const loader = async ({ params, context }) => {
 
 const safeDate = new Date("2024-03-01")
 export default function Article(){
-	const { article, readingTime } = useLoaderData<any>()
+	const { article } = useLoaderData<any>()
 	const { articleSlug } = useParams() as { articleSlug: string }
 
 	return (	
@@ -53,7 +53,7 @@ export default function Article(){
 
 			{ new Date(article.date) <= safeDate && 
 				<div className="-mx-[5px] md:mx-4 md:mb-8">
-					<AudioPlayer slug={articleSlug} defaultTime={readingTime} />
+					<AudioPlayer slug={articleSlug} defaultTime={article.readingTime} />
 				</div>
 			}
 			
