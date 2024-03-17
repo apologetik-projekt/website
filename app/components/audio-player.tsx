@@ -11,26 +11,30 @@ function secondsToMMSS(duration: number) {
 	date.setMinutes(minutes)
 	const seconds = duration - minutes * 60
 	date.setSeconds(seconds)
-	console.log(date)
 	return date.toISOString().substring(14,19)
 }
-export function AudioPlayer({ slug }: { slug: string }) {
+
+export function AudioPlayer({ slug, defaultTime }: { slug: string, defaultTime?: number }) {
 	const [isPlaying, setPlaying] = useState(false)
 	const [currentTime, setCurrentTime] = useState(0)
-	const [duration, setDuration] = useState<number>()
+	const [duration, setDuration] = useState<number>(defaultTime ?? 0)
 	const [isMuted, setMuted] = useState(false)
 	const [playbackSpeed, setPlaybackSpeed] = useState(speeds.indexOf(1))
 	const audioRef = useRef<HTMLAudioElement>(null)
 	const progressRef = useRef<HTMLProgressElement>(null)
 
 	useEffect(() => {
-		setDuration(audioRef.current?.duration ?? 0)
+		const duration = audioRef.current?.duration
+		if (duration && isFinite(duration)) {
+			setDuration(duration)
+		}
+		audioRef.current?.addEventListener("pause", () => setPlaying(false))
+		audioRef.current?.addEventListener("play", () => setPlaying(true))
 	}, [])
 
 	function play(e) {
 		e.target.focus()
 		audioRef.current?.play()
-		setDuration(audioRef.current?.duration ?? 0)
 		setPlaying(true)
 	}
 
@@ -66,8 +70,7 @@ export function AudioPlayer({ slug }: { slug: string }) {
 
 	function setProgress(e) {
 		if (audioRef.current) {
-			const currentDuration = audioRef.current.duration ?? 0
-			audioRef.current.currentTime = Math.floor(currentDuration) * (e.nativeEvent.offsetX / e.target.offsetWidth);
+			audioRef.current.currentTime = Math.floor(duration) * (e.nativeEvent.offsetX / e.target.offsetWidth);
 		}
 	}
 
@@ -99,6 +102,7 @@ export function AudioPlayer({ slug }: { slug: string }) {
       </div>
       <audio
 				ref={audioRef}
+				onLoadedMetadata={e => { console.log("loaded metadata", e, audioRef.current?.duration)}}
 				preload="metadata"
 				src={`https://assets.apologetik-projekt.de/audio/${slug}.mp3`}
 				onTimeUpdate={() => { setCurrentTime(audioRef.current?.currentTime ?? 0) } } 
