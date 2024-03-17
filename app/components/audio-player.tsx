@@ -17,21 +17,24 @@ function secondsToMMSS(duration: number) {
 export function AudioPlayer({ slug, defaultTime }: { slug: string, defaultTime?: number }) {
 	const [isPlaying, setPlaying] = useState(false)
 	const [currentTime, setCurrentTime] = useState(0)
-	console.log('default: ', defaultTime)
 	const [duration, setDuration] = useState<number>(defaultTime ?? 0)
 	const [isMuted, setMuted] = useState(false)
 	const [playbackSpeed, setPlaybackSpeed] = useState(speeds.indexOf(1))
 	const audioRef = useRef<HTMLAudioElement>(null)
 	const progressRef = useRef<HTMLProgressElement>(null)
 
-	useEffect(() => {
+	function setMetaData() {
 		const duration = audioRef.current?.duration
 		if (duration && isFinite(duration)) {
 			setDuration(duration)
 		}
+	}
+
+	useEffect(() => {
+		setMetaData()
 		audioRef.current?.addEventListener("pause", () => setPlaying(false))
 		audioRef.current?.addEventListener("play", () => setPlaying(true))
-	}, [])
+	}, [audioRef.current])
 
 	function play(e) {
 		e.target.focus()
@@ -103,8 +106,8 @@ export function AudioPlayer({ slug, defaultTime }: { slug: string, defaultTime?:
       </div>
       <audio
 				ref={audioRef}
-				onLoadedMetadata={e => { console.log("loaded metadata", e, audioRef.current?.duration)}}
 				preload="metadata"
+				onLoadedData={() => setMetaData()}
 				src={`http://localhost:4000/audio/${slug}.mp3`}
 				onTimeUpdate={() => { setCurrentTime(audioRef.current?.currentTime ?? 0) } } 
 			/>

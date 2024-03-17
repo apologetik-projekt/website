@@ -53,7 +53,7 @@ export default function Article(){
 
 			{ new Date(article.date) <= safeDate && 
 				<div className="-mx-[5px] md:mx-4 md:mb-8">
-					<AudioPlayer slug={articleSlug} defaultTime={article.readingTime} />
+					<AudioPlayer slug={articleSlug} defaultTime={article.readingTime * 60 * 1.5} />
 				</div>
 			}
 			
