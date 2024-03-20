@@ -18,7 +18,6 @@ export function AudioPlayer({ slug, defaultTime }: { slug: string, defaultTime?:
 	const [isPlaying, setPlaying] = useState(false)
 	const [currentTime, setCurrentTime] = useState(0)
 	const [duration, setDuration] = useState<number>(defaultTime ?? 0)
-	const [isMuted, setMuted] = useState(false)
 	const [playbackSpeed, setPlaybackSpeed] = useState(speeds.indexOf(1))
 	const audioRef = useRef<HTMLAudioElement>(null)
 	const progressRef = useRef<HTMLProgressElement>(null)
@@ -55,14 +54,6 @@ export function AudioPlayer({ slug, defaultTime }: { slug: string, defaultTime?:
 		}
 	}
 
-	function mute(e) {
-		e.target.focus()
-		if (audioRef.current) {
-			audioRef.current.muted = !audioRef.current.muted
-			setMuted(muted => !muted)
-		}
-	}
-
 	function setSpeed(e) {
 		e.target.focus()
 		if (audioRef.current) {
@@ -74,35 +65,45 @@ export function AudioPlayer({ slug, defaultTime }: { slug: string, defaultTime?:
 
 	function setProgress(e) {
 		if (audioRef.current) {
-			audioRef.current.currentTime = Math.floor(duration) * (e.nativeEvent.offsetX / e.target.offsetWidth);
+			audioRef.current.currentTime = Math.floor(audioRef.current.duration) * (e.nativeEvent.offsetX / e.target.offsetWidth);
 		}
 	}
 
   return (
-    <div className="pcast-player accent-yellow-100 dark:accent-yellow-600">
-      <div className="rounded-sm bg-gray-200 text-gray-900 dark:bg-black dark:text-white text-sm overflow-hidden p-2 box-border flex gap-1.5 items-center">
+    <div className="pcast-player accent-yellow-100 dark:accent-yellow-600 select-none">
+      <div className="rounded-px bg-black text-gray-100 dark:bg-black dark dark:text-white text-sm overflow-hidden p-2 box-border flex flex-col">
+				<div className="w-full flex gap-1.5 items-center mb-2">
+					<progress onClick={setProgress} ref={progressRef} className="cursor-col-resize flex-grow appearance-none h-6 md:h-3" value={currentTime + 1} max={duration} />
+				</div>
+				<div className="w-full flex items-center gap-1.5">
+
 				{ isPlaying ? (
-						<button id="pause" onClick={pause} className="bg-gray-400/50 dark:bg-gray-900 border-0 rounded-sm p-2 leading-6 appearance-none">
+						<button id="pause" onClick={pause} className="bg-gray-600/70 hover:brightness-110 transition-all duration-200 active:opacity-90 rounded-px p-2 leading-6 appearance-none">
 							<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5H8V19H6V5ZM16 5H18V19H16V5Z"></path></svg>
 						</button>
 					) : (
-						<button id="play" onClick={play} className="bg-gray-400/50 dark:bg-gray-900 border-0 rounded-sm p-2 leading-6 appearance-none">
+						<button id="play" onClick={play} className="bg-gray-600/70 hover:brightness-110 transition-all duration-200 active:opacity-90 rounded-px p-2 leading-6 appearance-none">
 							<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="1 0 24 24" fill="currentColor"><path d="M19.376 12.4161L8.77735 19.4818C8.54759 19.635 8.23715 19.5729 8.08397 19.3432C8.02922 19.261 8 19.1645 8 19.0658V4.93433C8 4.65818 8.22386 4.43433 8.5 4.43433C8.59871 4.43433 8.69522 4.46355 8.77735 4.5183L19.376 11.584C19.6057 11.7372 19.6678 12.0477 19.5146 12.2774C19.478 12.3323 19.4309 12.3795 19.376 12.4161Z"></path></svg>
 						</button>
 					)
 				}
-        <button id="rewind" onClick={rewind} className="bg-gray-400/50 dark:bg-gray-900 border-0 rounded-sm p-2 leading-6 appearance-none">
-					<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-1 -1 26 26" fill="currentColor"><path d="M2 4C1.44772 4 1 4.44772 1 5V19C1 19.5523 1.44772 20 2 20C2.55228 20 3 19.5523 3 19V13.3332L12.2227 19.4816C12.3048 19.5364 12.4013 19.5656 12.5 19.5656C12.7762 19.5656 13 19.3418 13 19.0656V13.3332L22.2227 19.4816C22.3048 19.5364 22.4013 19.5656 22.5 19.5656C22.7762 19.5656 23 19.3418 23 19.0656V4.93413C23 4.83542 22.9708 4.73892 22.9161 4.65679C22.7629 4.42702 22.4524 4.36493 22.2227 4.51811L13 10.6665V4.93413C13 4.83542 12.9708 4.73892 12.9161 4.65679C12.7629 4.42702 12.4524 4.36493 12.2227 4.51811L3 10.6666V5C3 4.44772 2.55228 4 2 4Z"></path></svg>
+        <button id="rewind" onClick={rewind} className="bg-gray-600/70 hover:brightness-110 transition-all duration-200 active:opacity-90 rounded-px p-2 leading-6 appearance-none">
+					<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-1 -1 26 26" fill="currentColor"><path d="M12 2C17.5228 2 22 6.47715 22 12 22 17.5228 17.5228 22 12 22 6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20 16.4183 20 20 16.4183 20 12 20 7.58172 16.4183 4 12 4 9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM8.5 15.5V8.5H10V15.5H8.5ZM12 8.5H16.75V10H13.5V11.25H14.875C16.0486 11.25 17 12.2014 17 13.375 17 14.5486 16.0486 15.5 14.875 15.5H12V14H14.875C15.2202 14 15.5 13.7202 15.5 13.375 15.5 13.0298 15.2202 12.75 14.875 12.75H12V8.5Z"></path></svg>
         </button>
-        <span className="px-1 tracking-wide">{secondsToMMSS(currentTime)}</span>
-        <progress onClick={setProgress} ref={progressRef} className="cursor-col-resize flex-grow appearance-none h-4" value={currentTime} max={duration} />
-        <span className="px-1 tracking-wide">{secondsToMMSS(duration ?? 0)}</span>
-        <button id="speed" onClick={setSpeed} className="bg-gray-400/50 dark:bg-gray-800 h-[34px] w-[52px] text-center border-0 rounded-sm px-2 appearance-none">{speeds[playbackSpeed]}x</button>
-        <button id="mute" onClick={mute} className="bg-gray-400/50 dark:bg-gray-800 border-0 rounded-sm p-2 leading-6 appearance-none">
-					{ isMuted 
-						? <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-1 -1 26 26" fill="currentColor"><path d="M5.88889 16H2C1.44772 16 1 15.5523 1 15V9.00001C1 8.44772 1.44772 8.00001 2 8.00001H5.88889L11.1834 3.66815C11.3971 3.49329 11.7121 3.52479 11.887 3.73851C11.9601 3.82784 12 3.93971 12 4.05513V19.9449C12 20.221 11.7761 20.4449 11.5 20.4449C11.3846 20.4449 11.2727 20.405 11.1834 20.3319L5.88889 16ZM20.4142 12L23.9497 15.5355L22.5355 16.9498L19 13.4142L15.4645 16.9498L14.0503 15.5355L17.5858 12L14.0503 8.46447L15.4645 7.05026L19 10.5858L22.5355 7.05026L23.9497 8.46447L20.4142 12Z"></path></svg>
-						: <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="-1 -1 26 26" fill="currentColor"><path d="M8.88889 16H5C4.44772 16 4 15.5523 4 15V9.00001C4 8.44772 4.44772 8.00001 5 8.00001H8.88889L14.1834 3.66815C14.3971 3.49329 14.7121 3.52479 14.887 3.73851C14.9601 3.82784 15 3.93971 15 4.05513V19.9449C15 20.221 14.7761 20.4449 14.5 20.4449C14.3846 20.4449 14.2727 20.405 14.1834 20.3319L8.88889 16ZM18.8631 16.5911L17.4411 15.169C18.3892 14.4376 19 13.2901 19 12C19 10.5697 18.2493 9.31469 17.1203 8.6076L18.5589 7.169C20.0396 8.2616 21 10.0187 21 12C21 13.8422 20.1698 15.4904 18.8631 16.5911Z"></path></svg>}
+				<div className="font-mono flex gap-1 px-1">
+					<span className="tracking-wide">{secondsToMMSS(currentTime)}</span>/
+					<span className="tracking-wide">{secondsToMMSS(duration ?? 0)}</span>
+				</div>
+        <div className="flex-grow" />
+				<button className="md:hidden opacity-80 p-2 items-center" onClick={() => alert("Transparenzhinweis: Audioaufnahme wurde künstlich generiert.")}>
+					<svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10.6144 17.7956 11.492 15.7854C12.2731 13.9966 13.6789 12.5726 15.4325 11.7942L17.8482 10.7219C18.6162 10.381 18.6162 9.26368 17.8482 8.92277L15.5079 7.88394C13.7092 7.08552 12.2782 5.60881 11.5105 3.75894L10.6215 1.61673C10.2916.821765 9.19319.821767 8.8633 1.61673L7.97427 3.75892C7.20657 5.60881 5.77553 7.08552 3.97685 7.88394L1.63658 8.92277C.868537 9.26368.868536 10.381 1.63658 10.7219L4.0523 11.7942C5.80589 12.5726 7.21171 13.9966 7.99275 15.7854L8.8704 17.7956C9.20776 18.5682 10.277 18.5682 10.6144 17.7956ZM19.4014 22.6899 19.6482 22.1242C20.0882 21.1156 20.8807 20.3125 21.8695 19.8732L22.6299 19.5353C23.0412 19.3526 23.0412 18.7549 22.6299 18.5722L21.9121 18.2532C20.8978 17.8026 20.0911 16.9698 19.6586 15.9269L19.4052 15.3156C19.2285 14.8896 18.6395 14.8896 18.4628 15.3156L18.2094 15.9269C17.777 16.9698 16.9703 17.8026 15.956 18.2532L15.2381 18.5722C14.8269 18.7549 14.8269 19.3526 15.2381 19.5353L15.9985 19.8732C16.9874 20.3125 17.7798 21.1156 18.2198 22.1242L18.4667 22.6899C18.6473 23.104 19.2207 23.104 19.4014 22.6899Z"></path></svg>
 				</button>
+				<div className="hidden md:flex opacity-50 hover:opacity-65 text-yellow-50 transition-opacity duration-500 tracking-wide p-2 appearance-none items-center gap-2 hover:cursor-default">
+					<svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10.6144 17.7956 11.492 15.7854C12.2731 13.9966 13.6789 12.5726 15.4325 11.7942L17.8482 10.7219C18.6162 10.381 18.6162 9.26368 17.8482 8.92277L15.5079 7.88394C13.7092 7.08552 12.2782 5.60881 11.5105 3.75894L10.6215 1.61673C10.2916.821765 9.19319.821767 8.8633 1.61673L7.97427 3.75892C7.20657 5.60881 5.77553 7.08552 3.97685 7.88394L1.63658 8.92277C.868537 9.26368.868536 10.381 1.63658 10.7219L4.0523 11.7942C5.80589 12.5726 7.21171 13.9966 7.99275 15.7854L8.8704 17.7956C9.20776 18.5682 10.277 18.5682 10.6144 17.7956ZM19.4014 22.6899 19.6482 22.1242C20.0882 21.1156 20.8807 20.3125 21.8695 19.8732L22.6299 19.5353C23.0412 19.3526 23.0412 18.7549 22.6299 18.5722L21.9121 18.2532C20.8978 17.8026 20.0911 16.9698 19.6586 15.9269L19.4052 15.3156C19.2285 14.8896 18.6395 14.8896 18.4628 15.3156L18.2094 15.9269C17.777 16.9698 16.9703 17.8026 15.956 18.2532L15.2381 18.5722C14.8269 18.7549 14.8269 19.3526 15.2381 19.5353L15.9985 19.8732C16.9874 20.3125 17.7798 21.1156 18.2198 22.1242L18.4667 22.6899C18.6473 23.104 19.2207 23.104 19.4014 22.6899Z"></path></svg>
+					<span className="font-light text-xs group-hover:block leading-none">Audioaufnahme wurde künstlich generiert</span>
+				</div>
+        <button id="speed" onClick={setSpeed} className="bg-gray-600/70 hover:brightness-110 transition-all duration-200 active:opacity-90 h-[34px] w-14 text-center rounded-px px-2 appearance-none">{speeds[playbackSpeed]}x</button>
+				</div>
       </div>
       <audio
 				ref={audioRef}
