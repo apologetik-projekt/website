@@ -109,7 +109,7 @@ export function AudioPlayer({ slug, defaultTime }: { slug: string, defaultTime?:
 				ref={audioRef}
 				preload="metadata"
 				onLoadedData={() => setMetaData()}
-				src={`http://localhost:4000/audio/${slug}.mp3`}
+				src={`https://assets.apologetik-projekt.de/audio/${slug}.mp3`}
 				onTimeUpdate={() => { setCurrentTime(audioRef.current?.currentTime ?? 0) } } 
 			/>
     </div>
