@@ -15,7 +15,7 @@ module.exports = {
         menu: 'context-menu'
       },
       fontFamily: {
-        'mono': ['Space Grotesk', ...defaultTheme.fontFamily.mono],
+        'mono': ['SpaceGrotesk', ...defaultTheme.fontFamily.mono],
         'serif': defaultTheme.fontFamily.serif,
         'sans': ["InterVariable", "-apple-system", "BlinkMacSystemFont", "system-ui", ...defaultTheme.fontFamily.sans]
       },
