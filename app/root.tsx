@@ -64,11 +64,11 @@ export default function App() {
   const currentHandle = matches?.[matches.length - 1]?.handle
   const headerTheme = currentHandle ? currentHandle["header"] : "light"  
 
-  useEffect(() => {
-    if (!isbot(navigator.userAgent)) {
-      trackPageview();
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (!isbot(navigator.userAgent)) {
+  //     trackPageview();
+  //   }
+  // }, [location]);
 
   return (
     <html lang="de">
