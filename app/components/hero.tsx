@@ -40,7 +40,7 @@ export default ({heading, image}: Props) => (
 					<motion.div variants={variants} initial="before" animate="after" className="my-2 md:mt-0 md:w-3/5 md:-ml-12">
 						<Image
 							alt="Zwei Personen unterhalten sich" 
-							width={532} height={390}
+							width={300} height={220}
 							className="m-0 bg-amber-500 saturate-[115%] w-full" 
 							loading="eager"
 							blurDataURL={image?.placeholder}
