@@ -11,6 +11,7 @@ import {
   Outlet,
 } from "@remix-run/react"
 import styles from "./tailwind.css"
+import fonts from "./styles/fonts.css"
 import Navigation from "~/components/navigation"
 import { useLoaderData } from "@remix-run/react"
 import Footer from "./components/footer"
@@ -33,6 +34,7 @@ export const meta: MetaFunction = () => [{
 },]
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: fonts },
   { rel: "stylesheet", href: styles },
   { rel: "stylesheet", href: "https://api.fonts.coollabs.io/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"},
   { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon.png"},
@@ -74,16 +76,11 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preconnect" href="https://api.fonts.coollabs.io" />
         <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
         <meta name="theme-color" content="#000" />
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <meta charSet="utf-8"/>
-        <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <meta httpEquiv="Accept-CH" content="Viewport-Width, Sec-CH-Viewport-Width" />
-        
         <Meta />
         <Links />
       </head>
