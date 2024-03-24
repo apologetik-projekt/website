@@ -41,14 +41,7 @@ export default ({heading, image}: Props) => (
 						<Image
 							alt="Zwei Personen unterhalten sich" 
 							width={532} height={390}
-							className="hidden md:block m-0 bg-amber-500 saturate-[115%] w-full" 
-							loading="eager"
-							blurDataURL={image?.placeholder}
-							src={image?.url}/>
-						<Image
-							alt="Zwei Personen unterhalten sich" 
-							width={367} height={275}
-							className="md:hidden m-0 bg-amber-500 saturate-[115%] w-full" 
+							className="m-0 bg-amber-500 saturate-[115%] w-full" 
 							loading="eager"
 							blurDataURL={image?.placeholder}
 							src={image?.url}/>
