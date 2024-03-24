@@ -1,4 +1,4 @@
-import { json, MetaFunction } from "@remix-run/cloudflare"
+import { HeadersFunction, json, MetaFunction } from "@remix-run/cloudflare"
 import { Link, unstable_useViewTransitionState, useLoaderData } from '@remix-run/react'
 import { Strapi } from "~/api/strapi"
 import { Image } from "~/components/image"
@@ -10,10 +10,14 @@ export const meta: MetaFunction = () => {
 	return [{ title: "Apologetik Projekt - Blog" }]
 }
 
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  "Cache-Control": loaderHeaders.get("Cache-Control") ?? "public, max-age=3600",
+})
+
 export const loader = async ({ context }) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
 	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&fields[3]=readingTime&sort[0]=date%3Adesc')
-	return json(articles)
+	return json(articles, { headers: { "Cache-Control": "public, max-age=60, stale-if-error=60, stale-while-revalidate=86400" }})
 }
 
 const fallBackImage = "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"

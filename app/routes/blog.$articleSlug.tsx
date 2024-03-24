@@ -4,7 +4,7 @@ import { Strapi } from "~/api/strapi"
 import Citation from "~/components/citation"
 import { BASE_URL } from "~/utils/constants"
 import { Image } from "~/components/image"
-import { MetaFunction } from "@remix-run/cloudflare"
+import { HeadersFunction, MetaFunction } from "@remix-run/cloudflare"
 import { useEffect, useRef, useState } from "react"
 import { AudioPlayer } from "~/components/audio-player"
 
@@ -25,10 +25,14 @@ export const links = () => [
   { rel: "stylesheet", href: "https://api.fonts.coollabs.io/css2?family=Noticia+Text&display=swap"},
 ]
 
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  "Cache-Control": loaderHeaders.get("Cache-Control") ?? "public, max-age=3600",
+})
+
 export const loader = async ({ params, context }) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
 	const { data: article } = (await strapi.fetch(`slugify/slugs/article/${params.articleSlug}?populate=author.image,image,content,readingTime`))
-  return json({ article })
+  return json({ article }, { headers: { "Cache-Control": "public, max-age=60, stale-if-error=60, stale-while-revalidate=86400" }})
 }
 
 const safeDate = new Date("2024-03-01")
