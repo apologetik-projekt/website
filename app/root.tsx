@@ -35,12 +35,14 @@ export const meta: MetaFunction = () => [{
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
   { rel: "stylesheet", href: "https://api.fonts.coollabs.io/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"},
-  // { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon/apple-touch-icon.png"},
+  { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon.png"},
   // { rel: "icon", sizes: "16x16", type: "image/png", href: "/favicon/favicon-16x16.png"},
   // { rel: "icon", sizes: "32x32", type: "image/png", href: "/favicon/favicon-32x32.png"},
   { rel: "manifest", href: "/site.webmanifest"},
-  { rel: "mask-icon", href: "/favicon/safari-pinned-tab.svg", color: "#000000"},
-  { rel: "shortcut icon", href: "/favicon/favicon.svg"},  
+  { rel: "mask-icon", href: "/favicon.svg", color: "#000000"},
+  { rel: "shortcut icon", href: "/favicon.svg"},  
+  { rel: "preload", href: "/fonts/SpaceGroteskVariable.woff2?v=2.0", as: "font", type: "font/woff2", crossOrigin: "anonymous"},
+  { rel: "preload", href: "/fonts/InterVariable.woff2?v=4.0", as: "font", type: "font/woff2", crossOrigin: "anonymous"},
 ]
 
 export const loader = async ({ context }) => {
@@ -81,6 +83,7 @@ export default function App() {
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <meta httpEquiv="Accept-CH" content="Viewport-Width, Sec-CH-Viewport-Width" />
+        
         <Meta />
         <Links />
       </head>
