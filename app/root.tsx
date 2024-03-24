@@ -2,7 +2,7 @@ import {
   Links,
   LiveReload,
   Meta,
-  MetaFunction,
+  type MetaFunction,
   Scripts,
   ScrollRestoration,
   json,
@@ -16,15 +16,13 @@ import Navigation from "~/components/navigation"
 import { useLoaderData } from "@remix-run/react"
 import Footer from "./components/footer"
 import MobileNavigation from "./components/mobile-nav"
-import { AnimatePresence } from "framer-motion"
 import { Strapi } from "./api/strapi"
 import { ErrorBoundary as GlobalErrorBoundary } from "./components/error-boundary"
-import { trackPageview } from './api/plausible'
-import { useEffect } from "react"
-import { NavigationItem } from "./types/navigation"
-import { LinksFunction } from "@remix-run/react/dist/routeModules"
-import { isbot } from "isbot"
-
+// import { trackPageview } from './api/plausible'
+// import { useEffect } from "react"
+import type { NavigationItem } from "./types/navigation"
+import type { LinksFunction } from "@remix-run/react/dist/routeModules"
+// import { isbot } from "isbot"
 
 export const meta: MetaFunction = () => [{ 
   title: "Das Apologetik Projekt - Christliche Apologetik",
@@ -37,8 +35,6 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: fonts },
   { rel: "stylesheet", href: styles },
   { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon.png"},
-  // { rel: "icon", sizes: "16x16", type: "image/png", href: "/favicon/favicon-16x16.png"},
-  // { rel: "icon", sizes: "32x32", type: "image/png", href: "/favicon/favicon-32x32.png"},
   { rel: "manifest", href: "/site.webmanifest"},
   { rel: "mask-icon", href: "/favicon.svg", color: "#000000"},
   { rel: "shortcut icon", href: "/favicon.svg"},  

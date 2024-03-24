@@ -1,6 +1,5 @@
-import { HeadersFunction } from "@remix-run/cloudflare"
-import { json } from "@remix-run/react"
-import { useLoaderData } from "@remix-run/react"
+import type { HeadersFunction } from "@remix-run/cloudflare"
+import { json, useLoaderData } from "@remix-run/react"
 import { Strapi } from "~/api/strapi"
 import Hero from "~/components/hero"
 import Testimonials from "~/components/testimonials"
