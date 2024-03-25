@@ -39,7 +39,7 @@ export default function Blog() {
 	return (
 		<>
 			<section className="w-full bg-cover bg-[center_top_33%] text-black dark:text-white -mt-24">
-				<div className="pt-12 pb-8 md:pt-24 md:pb-16 bg-gradient-to-b from-[#ffe16cbf] dark:from-[#5b4b0cd6] to-gray-50 dark:to-gray-900 bg-blend-hard-light saturate-75">
+				<div className="pt-12 pb-8 md:pt-24 md:pb-16 bg-gradient-to-b from-[#ffe16cef] dark:from-[#594a0ce6] to-gray-50 dark:to-[#0E0D0D] bg-blend-hard-light saturate-75">
 					<Link prefetch="intent" to={latestArticle.slug} unstable_viewTransition className="hidden max-w-5xl mx-auto mt-16 px-4 md:px-2 md:grid grid-cols-2 gap-x-12 hover:opacity-90 duration-200">	
 						<Image
 							style={{ viewTransitionName: getViewTransitionName("image")}}

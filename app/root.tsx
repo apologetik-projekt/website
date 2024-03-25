@@ -79,7 +79,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className={`bg-gray-50 ${isBlogRoute ? "dark:bg-gray-900" : ""} min-h-screen flex flex-col`}>
+      <body className={`bg-gray-50 ${isBlogRoute ? "dark:bg-[#0E0D0D]" : ""} min-h-screen flex flex-col`}>
         <MobileNavigation navigation={navigation}/>
         <Navigation navigation={navigation} background={headerTheme}/> 
         <Outlet />
