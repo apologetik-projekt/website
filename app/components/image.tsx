@@ -23,7 +23,7 @@ export function getOptimizedImageUrl(image: string, params: string = "") {
 export function Image({ src, className, width, height, placeholder, style, options, ...props }: Props) {
 	const shapeClasses = className?.split(" ").filter(c => c.includes("rounded") || c.includes("aspect")) ?? []
 	const ref = useRef<HTMLImageElement>(null)
-	const isInitiallyBlurred = !ref?.current?.complete == true && placeholder !== "empty"
+	const isInitiallyBlurred = ref.current && ref.current.complete !== true && placeholder !== "empty"
 	const [blurred, setBlurred] = useState(isInitiallyBlurred)
 	const classes = clsx(className, blurred ? "blurred" : isInitiallyBlurred ? "unblurred" : undefined)
 
