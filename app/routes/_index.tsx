@@ -1,6 +1,7 @@
 import type { HeadersFunction } from "@remix-run/cloudflare"
 import { json, useLoaderData } from "@remix-run/react"
 import { Strapi } from "~/api/strapi"
+import { Cards } from "~/components/blog-feature"
 import Hero from "~/components/hero"
 import Testimonials from "~/components/testimonials"
 
@@ -50,6 +51,7 @@ export default function Index() {
           }
 
         })}
+        <Cards />
       </main> 
     </>
   )
