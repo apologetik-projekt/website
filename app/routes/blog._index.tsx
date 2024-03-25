@@ -40,7 +40,7 @@ export default function Blog() {
 		<>
 			<section className="w-full bg-cover bg-[center_top_33%] text-black dark:text-white -mt-24">
 				<div className="pt-12 pb-8 md:pt-24 md:pb-16 bg-gradient-to-b from-[#ffe16cef] dark:from-[#594a0ce6] to-gray-50 dark:to-[#0E0D0D] bg-blend-hard-light saturate-75">
-					<Link prefetch="intent" to={latestArticle.slug} unstable_viewTransition className="hidden max-w-5xl mx-auto mt-16 px-4 md:px-2 md:grid grid-cols-2 gap-x-12 hover:opacity-90 duration-200">	
+					<Link prefetch="intent" to={latestArticle.slug} unstable_viewTransition className="hidden max-w-5xl mx-auto mt-16 px-4 md:px-2 md:grid grid-cols-2 md:gap-x-4 lg:gap-x-14 hover:opacity-90 duration-200">	
 						<Image
 							style={{ viewTransitionName: getViewTransitionName("image")}}
 							alt={latestArticle.title}
@@ -69,7 +69,7 @@ export default function Blog() {
 				</div>
 			</section>
 			<main className="max-w-5xl mx-auto px-4 md:px-2 mt-8 pb-10 w-full">
-				<Masonry className="md:gap-x-4 lg:gap-x-12" rowClassName="gap-y-6 md:gap-y-8">
+				<Masonry className="md:gap-x-4 lg:gap-x-14" rowClassName="gap-y-6 md:gap-y-8">
 						{
 							articles.map((article, index) => (
 								<Article key={index} article={article} />
