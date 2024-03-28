@@ -111,6 +111,15 @@ mark {
   color: black;
 }
 
+progress[value]::-webkit-progress-bar {
+  background-color: rgb(64 64 64 / 1);
+  border-radius: 1px;
+}
+
+progress[value]::-webkit-progress-value  {
+  background: yellow;
+}
+
 @media (prefers-color-scheme: dark) {
   .marker-yellow {
     background-color: #817c1891;

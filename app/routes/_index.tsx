@@ -1,6 +1,7 @@
-import { json } from "@remix-run/react"
-import { useLoaderData } from "@remix-run/react"
+import type { HeadersFunction } from "@remix-run/cloudflare"
+import { json, useLoaderData } from "@remix-run/react"
 import { Strapi } from "~/api/strapi"
+import { Cards } from "~/components/blog-feature"
 import Hero from "~/components/hero"
 import Testimonials from "~/components/testimonials"
 
@@ -15,6 +16,10 @@ export const handle = {
   header: 'dark',
 }
 
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  "Cache-Control": loaderHeaders.get("Cache-Control") ?? "public, max-age=3600",
+})
+
 
 export const loader = async ({ context }) => {
   const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
@@ -24,7 +29,7 @@ export const loader = async ({ context }) => {
     __component: "page.testimonials",
     testimonials: testimonals
   })
-  return json(data)
+  return json(data, { headers: { "Cache-Control": "public, max-age=60, stale-if-error=60, stale-while-revalidate=86400" }})
 }
 
 export default function Index() {
@@ -46,6 +51,7 @@ export default function Index() {
           }
 
         })}
+        <Cards />
       </main> 
     </>
   )

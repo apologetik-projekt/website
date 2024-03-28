@@ -2,7 +2,7 @@ import {
   Links,
   LiveReload,
   Meta,
-  MetaFunction,
+  type MetaFunction,
   Scripts,
   ScrollRestoration,
   json,
@@ -11,19 +11,18 @@ import {
   Outlet,
 } from "@remix-run/react"
 import styles from "./tailwind.css"
+import fonts from "./styles/fonts.css"
 import Navigation from "~/components/navigation"
 import { useLoaderData } from "@remix-run/react"
 import Footer from "./components/footer"
 import MobileNavigation from "./components/mobile-nav"
-import { AnimatePresence } from "framer-motion"
 import { Strapi } from "./api/strapi"
 import { ErrorBoundary as GlobalErrorBoundary } from "./components/error-boundary"
-import { trackPageview } from './api/plausible'
-import { useEffect } from "react"
-import { NavigationItem } from "./types/navigation"
-import { LinksFunction } from "@remix-run/react/dist/routeModules"
-import { isbot } from "isbot"
-
+// import { trackPageview } from './api/plausible'
+// import { useEffect } from "react"
+import type { NavigationItem } from "./types/navigation"
+import type { LinksFunction } from "@remix-run/react/dist/routeModules"
+// import { isbot } from "isbot"
 
 export const meta: MetaFunction = () => [{ 
   title: "Das Apologetik Projekt - Christliche Apologetik",
@@ -33,14 +32,14 @@ export const meta: MetaFunction = () => [{
 },]
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: fonts },
   { rel: "stylesheet", href: styles },
-  { rel: "stylesheet", href: "https://api.fonts.coollabs.io/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"},
-  // { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon/apple-touch-icon.png"},
-  // { rel: "icon", sizes: "16x16", type: "image/png", href: "/favicon/favicon-16x16.png"},
-  // { rel: "icon", sizes: "32x32", type: "image/png", href: "/favicon/favicon-32x32.png"},
+  { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon.png"},
   { rel: "manifest", href: "/site.webmanifest"},
-  { rel: "mask-icon", href: "/favicon/safari-pinned-tab.svg", color: "#000000"},
-  { rel: "shortcut icon", href: "/favicon/favicon.svg"},  
+  { rel: "mask-icon", href: "/favicon.svg", color: "#000000"},
+  { rel: "shortcut icon", href: "/favicon.svg"},  
+  { rel: "preload", href: "/fonts/SpaceGroteskVariable.woff2?v=2.0", as: "font", type: "font/woff2", crossOrigin: "anonymous"},
+  { rel: "preload", href: "/fonts/InterVariable.woff2?v=4.0", as: "font", type: "font/woff2", crossOrigin: "anonymous"},
 ]
 
 export const loader = async ({ context }) => {
@@ -61,30 +60,26 @@ export default function App() {
   const currentHandle = matches?.[matches.length - 1]?.handle
   const headerTheme = currentHandle ? currentHandle["header"] : "light"  
 
-  useEffect(() => {
-    if (!isbot(navigator.userAgent)) {
-      trackPageview();
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (!isbot(navigator.userAgent)) {
+  //     trackPageview();
+  //   }
+  // }, [location]);
 
   return (
     <html lang="de">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preconnect" href="https://api.fonts.coollabs.io" />
         <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
         <meta name="theme-color" content="#000" />
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <meta charSet="utf-8"/>
-        <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <meta httpEquiv="Accept-CH" content="Viewport-Width, Sec-CH-Viewport-Width" />
         <Meta />
         <Links />
       </head>
-      <body className={`bg-gray-50 ${isBlogRoute ? "dark:bg-gray-900" : ""} min-h-screen flex flex-col`}>
+      <body className={`bg-gray-50 ${isBlogRoute ? "dark:bg-[#0E0D0D]" : ""} min-h-screen flex flex-col`}>
         <MobileNavigation navigation={navigation}/>
         <Navigation navigation={navigation} background={headerTheme}/> 
         <Outlet />
