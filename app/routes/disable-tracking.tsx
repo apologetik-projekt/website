@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
+
+function getTrackingStatus() {
+  if (typeof window !== "undefined") {
+    return window.localStorage.getItem("plausible_ignore") !== "true"
+  }
+  else return true
+}
 
 export default function TrackingSettings() {
-  const [isTrackingEnabled, setIsTrackingEnabled] = useState(window.localStorage.getItem("plausible_ignore") !== "true");
+  const [isTrackingEnabled, setIsTrackingEnabled] = useState(getTrackingStatus())
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setIsTrackingEnabled(!isTrackingEnabled)
