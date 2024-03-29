@@ -47,7 +47,7 @@ export default ({heading, image}: Props) => (
 							src={image?.url}/>
 					</motion.div>
 					<motion.div variants={textVariant} id="heading" initial="hidden" animate="show" className="-mt-6 sm:mt-10 md:w-3/5 md:min-w-[350px]">
-						<h1 className="leading-7 font-mono drop-shadow-sm text-xl relative z-10">{heading}</h1>
+						<h1 className="leading-7 font-mono text-xl relative z-10">{heading}</h1>
 					</motion.div>
 				</section>
 				</div>
