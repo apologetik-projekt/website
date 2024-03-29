@@ -18,11 +18,11 @@ import Footer from "./components/footer"
 import MobileNavigation from "./components/mobile-nav"
 import { Strapi } from "./api/strapi"
 import { ErrorBoundary as GlobalErrorBoundary } from "./components/error-boundary"
-// import { trackPageview } from './api/plausible'
-// import { useEffect } from "react"
+import { trackPageview } from './api/plausible'
+import { useEffect } from "react"
 import type { NavigationItem } from "./types/navigation"
 import type { LinksFunction } from "@remix-run/react/dist/routeModules"
-// import { isbot } from "isbot"
+import { isbot } from "isbot"
 
 export const meta: MetaFunction = () => [{ 
   title: "Das Apologetik Projekt - Christliche Apologetik",
@@ -60,11 +60,11 @@ export default function App() {
   const currentHandle = matches?.[matches.length - 1]?.handle
   const headerTheme = currentHandle ? currentHandle["header"] : "light"  
 
-  // useEffect(() => {
-  //   if (!isbot(navigator.userAgent)) {
-  //     trackPageview();
-  //   }
-  // }, [location]);
+  useEffect(() => {
+    if (!isbot(navigator.userAgent)) {
+      trackPageview();
+    }
+  }, [location]);
 
   return (
     <html lang="de">

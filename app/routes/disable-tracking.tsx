@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react"
 
 export default function TrackingSettings() {
-  const [isTrackingEnabled, setIsTrackingEnabled] = useState(true);
-
-  useEffect(() => {
-    setIsTrackingEnabled(window.localStorage.getItem("plausible_ignore") !== "true")
-  }, []);
+  const [isTrackingEnabled, setIsTrackingEnabled] = useState(window.localStorage.getItem("plausible_ignore") !== "true");
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setIsTrackingEnabled(!isTrackingEnabled)
