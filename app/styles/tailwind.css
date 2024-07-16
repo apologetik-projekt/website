@@ -22,6 +22,9 @@ blockquote > *:first-child {
   @apply font-medium italic leading-7 text-xl
 }
 
+blockquote p:first-of-type::before { content: none }
+blockquote p:first-of-type::after { content: none }
+
 #heading *:not(h1) {
 	display: none;
 }
