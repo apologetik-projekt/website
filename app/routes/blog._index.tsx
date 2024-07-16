@@ -21,7 +21,7 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => ({
 
 export const loader = async ({ context }) => {
 	const strapi = new Strapi(context.env.STRAPI_API_URL, context.env.STRAPI_AUTH_TOKEN)
-	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&fields[3]=readingTime&sort[0]=date%3Adesc')
+	const { data: articles } = await strapi.fetch('articles?populate[0]=image&populate[1]=author.image&fields[0]=title&fields[1]=slug&fields[2]=description&fields[3]=readingTime&sort[0]=date%3Adesc&pagination[pageSize]=200')
 	return json(articles, { headers: { "Cache-Control": "public, max-age=60, stale-if-error=60, stale-while-revalidate=86400" }})
 }
 
