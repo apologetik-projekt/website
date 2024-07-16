@@ -35,7 +35,9 @@ export const loader = async ({ params, context }) => {
   return json({ article }, { headers: { "Cache-Control": "public, max-age=60, stale-if-error=60, stale-while-revalidate=86400" }})
 }
 
-const safeDate = new Date("2024-03-01")
+const safeDate = new Date()
+safeDate.setDate(safeDate.getDate() - 1)
+
 export default function Article(){
 	const { article } = useLoaderData<any>()
 	const { articleSlug } = useParams() as { articleSlug: string }
