@@ -12,7 +12,7 @@
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public -b $(cat .env) --compatibility-date=2023-10-30",
     "dev:css": "pnpm run generate:css -- --watch",
     "dev:remix": "remix watch",
-    "generate:css": "pnpx tailwindcss -i ./app/styles/tailwind.css -o ./app/tailwind.css",
+    "generate:css": "pnpm dlx tailwindcss@3 -i ./app/styles/tailwind.css -o ./app/tailwind.css",
     "start": "cross-env NODE_ENV=production npm run dev:wrangler"
   },
   "dependencies": {
@@ -51,5 +51,6 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "packageManager": "pnpm@9.15.3"
 }
