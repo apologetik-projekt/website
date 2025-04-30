@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react"
 import { AudioPlayer } from "~/components/audio-player"
 
 export const meta = ({data: { article }, location}) => [{
-	title: `${article.title} | Apologetik Projetkt`,
+	title: `${article.title} | Apologetik Projekt`,
 	site_name: 'Das Apologetik Projekt',
 	'og:url': BASE_URL + location.pathname,
 	'og:title': `${article.seo_title ?? article.title} | Apologetik Projekt`,
